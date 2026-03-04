@@ -10,14 +10,12 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
     setSidebarOpen(false);
   }, [pathname]);
   return (
-    <div className="flex h-screen">
+    <>
+      <TopNav onMenuClick={() => setSidebarOpen(true)} />
+
+      <main className="min-h-screen  ">{children}</main>
+
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-
-      <div className="flex flex-col flex-1 overflow-auto">
-        <TopNav onMenuClick={() => setSidebarOpen(true)} />
-
-        <main className="flex-1  bg-gray-100 ">{children}</main>
-      </div>
-    </div>
+    </>
   );
 }

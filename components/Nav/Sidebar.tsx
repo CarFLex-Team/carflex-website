@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
-import { PanelLeftClose, LogOut, PanelLeftOpen } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
+
 export default function Sidebar({
   open,
   setOpen,
@@ -9,91 +9,54 @@ export default function Sidebar({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  // const { data: session, status } = useSession();
-  const [active, setActive] = useState<string | null>(null);
-  const pathname = usePathname() ?? "/";
-
   const navItems = [
-    { id: "teamDashboard", label: "Dashboard", href: "/dashboard" },
-    {
-      id: "teamCustomers",
-      label: "Customers",
-      href: "/customers",
-    },
-    {
-      id: "teamInventory",
-      label: "Inventory",
-      href: "/inventory",
-    },
-    {
-      id: "teamServices",
-      label: "Services",
-      href: "/services",
-    },
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Customers", href: "/customers" },
+    { label: "Inventory", href: "/inventory" },
+    { label: "Services", href: "/services" },
   ];
-  useEffect(() => {
-    if (!navItems.length) return;
-
-    const current = navItems.find((i) => i.href === pathname);
-
-    setActive(current?.label || null);
-  }, [pathname, navItems]);
-  if (status === "loading") {
-    return null; // or skeleton
-  }
 
   return (
     <>
-      <button
-        type="button"
+      <div
         className={`absolute inset-0 bg-black/40 transition-opacity duration-200 z-20 md:hidden ${
-          open ? "opacity-100" : "hidden"
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpen(false)}
-        aria-label="Close menu"
       />
 
+      {/* Sidebar */}
       <aside
-        className={`h-screen flex flex-col justify-around sm:justify-between bg-white border-r-2 border-r-gray-100  px-4 py-6  z-50  max-md:fixed max-md:inset-0 transform transition-transform duration-300 ease-in-out ${
-          open ? "w-58 max-md:translate-x-0" : "w-16 max-md:-translate-x-full"
+        className={`h-screen flex flex-col bg-white border-l-2 border-gray-200 px-4 py-6 z-50 fixed right-0 transform transition-transform duration-300 ease-in-out md:hidden ${
+          open ? "w-64 translate-x-0" : "w-16 translate-x-full"
         }`}
       >
-        <div className="overflow-auto">
-          <div
-            className={`flex items-center  mb-4 ${
-              open ? "justify-between" : "justify-center"
-            }`}
+        <div className="flex items-center justify-between">
+          <img
+            src="/Logo.png"
+            alt="Logo"
+            className={`w-16 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+          />
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle Sidebar"
+            className="p-1 rounded-sm hover:bg-gray-100 cursor-pointer"
           >
-            {open && <img src="/Logo.png" alt=" Logo" className=" w-8" />}
-            <button
-              onClick={() => setOpen(!open)}
-              aria-label="Close listings menu"
-              className="p-1 rounded-sm  hover:bg-gray-100 cursor-pointer"
-            >
-              {open ? (
-                <PanelLeftClose size={22} />
-              ) : (
-                <PanelLeftOpen size={22} />
-              )}
-            </button>
-          </div>
+            <X size={22} />
+          </button>
+        </div>
 
-          <div
-            className="flex flex-col gap-2 mt-10"
-            aria-label="Mobile listings"
-          >
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => setActive(item.label)}
-                className={
-                  open ? " px-4 py-3 rounded-lg" : "p-1 mb-2 rounded-md"
-                }
-              >
-                {open && item.label}
-              </button>
-            ))}
-          </div>
+        {/* Sidebar Links */}
+        <div className="mt-10 flex flex-col gap-2">
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="px-4 py-3 rounded-lg hover:bg-gray-100"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </aside>
     </>
