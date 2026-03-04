@@ -1,3 +1,7 @@
+"use client";
+
+import SellCarContainer from "./SellCarContainer";
+
 export default function Main() {
   return (
     <>
@@ -17,8 +21,8 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <div className="relative -mt-10 z-10 flex items-center justify-center px-3 sm:px-8 md:px-15 ">
-        <div className="bg-secondary-800/90 h-30 w-full "></div>
+      <div className="relative -mt-13 z-10 flex items-center justify-center px-3 sm:px-8 md:px-15 ">
+        <SellCarContainer />
       </div>
     </>
   );
