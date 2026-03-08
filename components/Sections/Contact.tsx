@@ -21,25 +21,27 @@ export default function Contact() {
               placeholder="Full Name"
             />
             <input
-              type="text"
+              type="email"
               name=""
               id=""
               className="p-4 bg-white w-full"
               placeholder="Email"
             />
             <input
-              type="text"
+              type="tel"
               name=""
               id=""
               className="p-4 bg-white w-full"
               placeholder="Phone Number"
             />
-            <input
-              type="text"
+            <textarea
               name=""
               id=""
-              className="p-4 bg-white w-full"
-              placeholder="Question"
+              className="p-4 bg-white w-full h-24"
+              placeholder="Your Message
+              
+
+"
             />
 
             <button
