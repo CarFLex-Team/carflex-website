@@ -10,7 +10,7 @@ export default function Main() {
       <div className="relative flex items-center justify-center h-[70vh] p-4 bg-secondary-800">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20 "
-          style={{ backgroundImage: `url('home.png')` }}
+          style={{ backgroundImage: `url('imgs/home.png')` }}
         />
         <div className="relative z-10 flex flex-col w-full gap-10">
           <div className=" flex flex-col gap-4 ml-2 md:ml-10">
