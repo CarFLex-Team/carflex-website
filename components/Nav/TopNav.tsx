@@ -13,7 +13,7 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
       className="flex justify-between items-center min-h-17  px-6 sm:px-9 bg-gray-100 fixed  w-full top-0 z-30 border-b-2 border-gray-200 "
       aria-label="Listings navigation"
     >
-      <img src="logo.png" alt="Carflex Logo" className="w-24" />
+      <img src="/logo.png" alt="Carflex Logo" className="w-24" />
       <div className="w-fit max-md:hidden flex items-center gap-4">
         {navItems.map((item) => (
           <a
