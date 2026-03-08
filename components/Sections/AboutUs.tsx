@@ -6,7 +6,7 @@ export default function AboutUs() {
   return (
     <>
       <div
-        className="flex flex-col justify-center my-3 px-3 sm:px-8 md:px-15 bg-secondary-800 py-15"
+        className="flex flex-col justify-center my-3 px-5 sm:px-8 md:px-15 bg-secondary-800 py-15"
         id="about"
       >
         <div className="flex items-center justify-between mb-10">
@@ -33,7 +33,7 @@ export default function AboutUs() {
           />
         </div>
       </div>
-      <div className="flex flex-col justify-center my-3 px-3 sm:px-8 md:px-15 bg-background py-15">
+      <div className="flex flex-col justify-center my-3 px-5 sm:px-8 md:px-15 bg-background py-15">
         <div className="flex items-center justify-between mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 ">
             How it Works

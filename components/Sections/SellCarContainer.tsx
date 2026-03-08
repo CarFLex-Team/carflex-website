@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import ToggleButton from "../Buttons/ToggleButton";
 import VehicleDetailsForm from "../Forms/VehicleDetailsForm";

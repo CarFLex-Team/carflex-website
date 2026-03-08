@@ -1,5 +1,3 @@
-"use client";
-
 import { Star } from "lucide-react";
 import SellCarContainer from "./SellCarContainer";
 import GoogleIcon from "../Icons/googleIcon";
