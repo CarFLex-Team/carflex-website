@@ -1,6 +1,6 @@
 export default function VehicleDetailsForm() {
   return (
-    <form action="" className="flex flex-col md:flex-row  gap-4">
+    <form action="" className="flex flex-col md:flex-row items-center gap-4">
       <select
         defaultValue={""}
         className="p-4 rounded-full  w-full  text-background border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary-400 bg-secondary-800/40"
