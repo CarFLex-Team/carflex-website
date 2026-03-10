@@ -1,6 +1,7 @@
 "use client";
 
 import AboutCard from "../Cards/AboutCard";
+import HowCard from "../Cards/HowCard";
 
 export default function AboutUs() {
   return (
@@ -21,7 +22,7 @@ export default function AboutUs() {
           />
           <AboutCard
             title="Friendly Staff"
-            description="Since 2015 we have provided a simple and easy way to sell your car ensuring your experience is seamless and satisfactory from start to finish."
+            description="Our team is dedicated to providing you with a friendly and professional experience. We are here to answer your questions and guide you through the process of selling your car."
           />
           <AboutCard
             title="Easy Process"
@@ -40,56 +41,26 @@ export default function AboutUs() {
           </h1>
         </div>
         <div className="flex flex-col  items-center justify-center">
-          <div className="flex flex-col md:flex-row  w-full items-center justify-center gap-15 my-10">
-            <div className="md:w-1/2 w-full">
-              <p className="text-gray-700 text-2xl font-bold  ">
-                Tell Us About Your Car
-              </p>
-              <p className="text-gray-700 text-md  ">
-                Submit your car details and get an instant offer. No more
-                haggling or waiting around.
-              </p>
-            </div>
-            <img
-              src="/imgs/tell-us.jpg"
-              alt="How it Works"
-              className="max-w-2/3 md:max-w-1/3 h-auto rounded-lg shadow-md"
-            />
-          </div>
-          <div className="flex flex-col md:flex-row-reverse  w-full items-center justify-center gap-15 my-10">
-            <div className="md:w-1/2 w-full">
-              <p className="text-gray-700 text-2xl font-bold  ">
-                Verify Your Offer
-              </p>
-              <p className="text-gray-700 text-md  ">
-                We will verify your offer and schedule a convenient time to pick
-                up your car. No more waiting around or dealing with pushy
-                buyers.
-              </p>
-            </div>
-            <img
-              src="/imgs/verify-offer.png"
-              alt="How it Works"
-              className="max-w-2/3 md:max-w-1/3 h-auto rounded-lg shadow-md"
-            />
-          </div>
-          <div className="flex flex-col md:flex-row  w-full items-center justify-center gap-15 my-10">
-            <div className="md:w-1/2 w-full">
-              <p className="text-gray-700 text-2xl font-bold  ">
-                Pick Up and Get Paid
-              </p>
-              <p className="text-gray-700 text-md  ">
-                We will pick up your car and pay you on the spot with the
-                payment method you prefer. No more waiting for checks to clear
-                or dealing with unreliable buyers.
-              </p>
-            </div>
-            <img
-              src="/imgs/pick-up.png"
-              alt="How it Works"
-              className="max-w-2/3 md:max-w-1/3 h-auto rounded-lg shadow-md"
-            />
-          </div>
+          <HowCard
+            title="Tell Us About Your Car"
+            description="Submit your car details and get an instant offer. No more haggling or waiting around."
+            imgLink="/imgs/tell-us.jpg"
+            imgAlt="Tell Us About Your Car"
+          />
+
+          <HowCard
+            title="Verify Your Offer"
+            description="We will verify your offer and schedule a convenient time to pick up your car. No more waiting around or dealing with pushy buyers."
+            imgLink="/imgs/verify-offer.png"
+            imgAlt="Verify Your Offer"
+            isReversed
+          />
+          <HowCard
+            title="Pick Up and Get Paid"
+            description="We will pick up your car and pay you on the spot with the payment method you prefer. No more waiting for checks to clear or dealing with unreliable buyers."
+            imgLink="/imgs/pick-up.png"
+            imgAlt="Pick Up and Get Paid"
+          />
         </div>
       </div>
     </>

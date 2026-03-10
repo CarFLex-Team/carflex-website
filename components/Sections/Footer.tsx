@@ -25,10 +25,10 @@ export default function Footer() {
         <div className="flex flex-col space-y-2">
           <span className="font-semibold">CUSTOMER SERVICE</span>
           <a
-            href="mailto:info@carflex.ca"
+            href="mailto:info@carflexplus.ca"
             className="hover:text-orange-500 no-underline"
           >
-            info@carflex.ca
+            info@carflexplus.ca
           </a>
           <a
             href="tel:(437) 505-2388"

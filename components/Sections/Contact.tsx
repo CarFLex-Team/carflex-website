@@ -72,9 +72,9 @@ export default function Contact() {
 
             <a
               className="text-gray-300 text-md mb-2 underline underline-offset-4 hover:no-underline block "
-              href="mailto:info@carflex.ca"
+              href="mailto:info@carflexplus.ca"
             >
-              info@carflex.ca
+              info@carflexplus.ca
             </a>
           </div>
         </div>

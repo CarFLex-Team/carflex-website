@@ -1,6 +1,4 @@
-"use client";
-import { useState } from "react";
-import { PanelLeftClose, PanelLeftOpen, X } from "lucide-react";
+import { X } from "lucide-react";
 
 export default function Sidebar({
   open,
@@ -10,16 +8,16 @@ export default function Sidebar({
   setOpen: (open: boolean) => void;
 }) {
   const navItems = [
-    { label: "Dashboard", href: "/dashboard" },
-    { label: "Customers", href: "/customers" },
-    { label: "Inventory", href: "/inventory" },
-    { label: "Services", href: "/services" },
+    { label: "Sell My car", href: "/sell-car" },
+    { label: "Reviews", href: "#reviews" },
+    { label: "About Us", href: "#about" },
+    { label: "Contact Us", href: "#contact" },
   ];
 
   return (
     <>
       <div
-        className={`absolute inset-0 bg-black/40 transition-opacity duration-200 z-20 md:hidden ${
+        className={`fixed inset-0 bg-black/40 transition-opacity duration-200 z-30 md:hidden ${
           open ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpen(false)}
@@ -27,7 +25,7 @@ export default function Sidebar({
 
       {/* Sidebar */}
       <aside
-        className={`h-screen flex flex-col bg-white border-l-2 border-gray-200 px-4 py-6 z-50 fixed right-0 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`h-screen  flex flex-col bg-white border-l-2 border-gray-200 px-4 py-6 z-50 fixed right-0 top-0 transform transition-transform duration-300 ease-in-out md:hidden ${
           open ? "w-64 translate-x-0" : "w-16 translate-x-full"
         }`}
       >
