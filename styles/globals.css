@@ -9,6 +9,12 @@
   --color-secondary-800: #122943;
   --color-secondary-400: #5e7ea2;
   --color-background: #f7f9fb;
+  --color-dark-background: #1a1a1a;
+  --color-dark-primary-600: #8b5833;
+  --color-dark-primary-500: #e78b48;
+  --color-dark-primary-400: #d09870;
+  --color-dark-secondary-800: #122943;
+  --color-dark-secondary-400: #5e7ea2;
 }
 html {
   scroll-behavior: smooth;

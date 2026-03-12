@@ -4,6 +4,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import SellCarContainer from "./SellCarContainer";
 import GoogleIcon from "../Icons/googleIcon";
 import { useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function Reviews() {
   const reviews = [
@@ -54,6 +55,7 @@ thankyou`,
       stars: 5,
     },
   ];
+  const loopReviews = [...reviews, ...reviews];
   const scrollRef = useRef<HTMLDivElement>(null);
   const scroll = (offset: number) => {
     if (scrollRef.current) {
@@ -81,39 +83,49 @@ thankyou`,
         </a>
       </div>
       <div className=" items-center gap-4">
-        <div
-          className="flex overflow-x-scroll gap-4 py-4 px-4 hide-scrollbar"
-          ref={scrollRef}
-        >
-          {reviews.map((review, index) => (
-            <div
-              key={index}
-              className="flex-none w-60 md:w-80 bg-white rounded-lg border border-secondary-800 shadow-md p-4 snap-start"
-            >
-              <img
-                src={review.image}
-                alt={review.name}
-                className="w-full h-40 object-cover rounded-md mb-4"
-              />
-              <div className="flex items-center mb-2">
-                <span className="text-yellow-400 mr-2 flex">
-                  {Array(review.stars)
-                    .fill(undefined)
-                    .map((_, i) => (
-                      <Star key={i} fill="orange" stroke="none" size={16} />
-                    ))}
-                </span>
-                <GoogleIcon width={16} height={16} />
+        <div className="overflow-hidden relative w-full">
+          <motion.div
+            className="flex gap-4 py-4 px-4"
+            animate={{ x: ["0%", "-50%"] }} // slide left by 50% (halfway)
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              },
+            }}
+          >
+            {loopReviews.map((review, index) => (
+              <div
+                key={index}
+                className="flex-none w-60 md:w-80 bg-white rounded-lg border border-secondary-800 shadow-md p-4"
+              >
+                <img
+                  src={review.image}
+                  alt={review.name}
+                  className="w-full h-40 object-cover rounded-md mb-4"
+                />
+                <div className="flex items-center mb-2">
+                  <span className="text-yellow-400 mr-2 flex">
+                    {Array(review.stars)
+                      .fill(undefined)
+                      .map((_, i) => (
+                        <Star key={i} fill="orange" stroke="none" size={16} />
+                      ))}
+                  </span>
+                  <GoogleIcon width={16} height={16} />
+                </div>
+                <p className="text-gray-700 mb-4 text-sm line-clamp-4">
+                  {review.text}
+                </p>
+                <p className="font-semibold">{review.name}</p>
+                <p className="text-gray-400 text-sm">{review.city}</p>
               </div>
-              <p className="text-gray-700 mb-4 text-sm line-clamp-4">
-                {review.text}
-              </p>
-              <p className="font-semibold">{review.name}</p>
-              <p className="text-gray-400 text-sm">{review.city}</p>
-            </div>
-          ))}
+            ))}
+          </motion.div>
         </div>
-        <div className=" flex gap-10 justify-center my-2">
+        {/* <div className=" flex gap-10 justify-center my-2">
           <button
             onClick={() => scroll(-350)}
             className="bg-secondary-800 rounded-full p-1 shadow z-10 cursor-pointer"
@@ -126,7 +138,7 @@ thankyou`,
           >
             <ChevronRight size={18} color="white" />
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

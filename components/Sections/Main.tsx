@@ -9,7 +9,10 @@ const anton = Anton({ subsets: ["latin"], weight: "400" });
 export default function Main() {
   return (
     <>
-      <div className="relative flex items-center justify-center h-[80vh] p-4 bg-secondary-800">
+      <div
+        className="relative flex items-center justify-center h-[80vh] p-4 bg-secondary-800"
+        id="home"
+      >
         <video
           className="absolute inset-0 w-full h-full object-cover object-top opacity-30"
           src="/video/car_video.mp4"
