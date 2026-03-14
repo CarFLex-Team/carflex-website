@@ -22,7 +22,7 @@ export default function AnimatedRating() {
     if (!inView) return; // do nothing until visible
 
     let start = 0;
-    const increment = rating / 130;
+    const increment = rating / 50;
     const interval = setInterval(() => {
       start += increment;
       if (start >= rating) {
@@ -30,7 +30,7 @@ export default function AnimatedRating() {
         clearInterval(interval);
       }
       setDisplayRating(parseFloat(start.toFixed(1)));
-    }, 20);
+    }, 80);
     return () => clearInterval(interval);
   }, [inView, rating]);
 
@@ -66,10 +66,14 @@ export default function AnimatedRating() {
               key={i}
               initial={{ scale: 0 }}
               animate={{ scale: i < activeStars ? 1 : 0.8 }}
-              transition={{ delay: i * 0.15, type: "spring", stiffness: 300 }}
+              transition={{
+                delay: i * 0.15,
+                type: "spring",
+                stiffness: 300,
+              }}
             >
               <Star
-                fill={i < activeStars ? "orange" : "gray"}
+                fill={i < activeStars ? "orange" : "orange"}
                 stroke="none"
                 size={20}
               />
@@ -80,7 +84,7 @@ export default function AnimatedRating() {
         className=" text-secondary-800 dark:text-blue-100 text-lg font-semibold"
         initial={{ opacity: 0 }}
         animate={{ opacity: inView ? 1 : 0 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.5, ease: "easeInOut" }}
       >
         {displayRating.toFixed(1)}
       </motion.p>
