@@ -1,5 +1,6 @@
-import { X } from "lucide-react";
-import TrackedImage from "../ClientRender/TrackedImage";
+import { PhoneIcon, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Sidebar({
   open,
@@ -8,56 +9,73 @@ export default function Sidebar({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
+  const [activeSection, setActiveSection] = useState<string>("");
   const navItems = [
-    { label: "Sell My car", href: "/sell-car" },
-    { label: "Reviews", href: "#reviews" },
-    { label: "About Us", href: "#about" },
-    { label: "Contact Us", href: "#contact" },
+    { label: "Home", href: "home" },
+    { label: "Reviews", href: "reviews" },
+    { label: "About", href: "about" },
+    { label: "Contact", href: "contact" },
   ];
+  const handleScrollTo = (id: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const section = document.getElementById(id);
+    if (section) {
+      const yOffset = -100; // sticky nav offset
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+    setOpen(false);
+  };
+  // Fade-in variants for overlay
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.3 } },
+  };
 
   return (
-    <>
-      <div
-        className={`fixed inset-0 bg-black/40 transition-opacity duration-200 z-30 md:hidden ${
-          open ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={() => setOpen(false)}
-      />
-
-      {/* Sidebar */}
-      <aside
-        className={`h-screen  flex flex-col bg-white border-l-2 border-gray-200 px-4 py-6 z-50 fixed right-0 top-0 transform transition-transform duration-300 ease-in-out md:hidden ${
-          open ? "w-64 translate-x-0" : "w-16 translate-x-full"
-        }`}
-      >
-        <div className="flex items-center justify-between">
-          <img
-            src="/Logo.png"
-            alt="Logo"
-            className={`w-16 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
-          />
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle Sidebar"
-            className="p-1 rounded-sm hover:bg-gray-100 cursor-pointer"
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 bg-background dark:bg-zinc-800 z-30 md:hidden"
+          variants={overlayVariants}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          onClick={() => setOpen(false)}
+        >
+          {/* Centered Sidebar Content */}
+          <motion.div
+            className="fixed inset-0 flex flex-col items-center justify-center text-secondary-800 dark:text-blue-100 gap-8 text-2xl font-medium pt-8"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
-            <X size={22} />
-          </button>
-        </div>
-
-        {/* Sidebar Links */}
-        <div className="mt-10 flex flex-col gap-2">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="px-4 py-3 rounded-lg hover:bg-gray-100"
+            {/* Nav Items */}
+            <motion.div
+              className="flex flex-col items-center gap-6 text-2xl font-medium"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
             >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </aside>
-    </>
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={handleScrollTo(item.href)}
+                  className="px-6 py-3 rounded-lg hover:bg-white/20 transition"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </motion.div>
+            <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 bg-gray-200 dark:bg-zinc-700 transition-colors duration-300 p-2 rounded-lg ">
+              <PhoneIcon size={20} />
+              <a className=" text-sm font-semibold " href="tel:(437) 505-2388">
+                (437) 505-2388
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

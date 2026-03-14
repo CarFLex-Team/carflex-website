@@ -12,7 +12,10 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
   return (
     <>
-      <TopNav onMenuClick={() => setSidebarOpen(true)} />
+      <TopNav
+        open={sidebarOpen}
+        onMenuClick={() => setSidebarOpen(!sidebarOpen)}
+      />
 
       <main className="min-h-screen bg-background dark:bg-zinc-900  ">
         {children}

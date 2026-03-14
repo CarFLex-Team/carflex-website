@@ -1,9 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Menu, PhoneIcon } from "lucide-react";
+import { Menu, PhoneIcon, X } from "lucide-react";
 import Logo from "../ClientRender/Logo";
 
-export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
+export default function TopNav({
+  open,
+  onMenuClick,
+}: {
+  open: boolean;
+  onMenuClick: () => void;
+}) {
   const [activeSection, setActiveSection] = useState<string>("");
 
   const navItems = [
@@ -46,7 +52,7 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
     }
   };
   return (
-    <nav className="flex justify-between items-center min-h-17 px-6 sm:px-9 bg-gray-100 dark:bg-zinc-800 fixed w-full top-0 z-30 border-b-2 border-gray-200 dark:border-zinc-700">
+    <nav className="flex justify-between items-center min-h-17 px-6 sm:px-9 bg-gray-100 dark:bg-zinc-800 fixed w-full top-0 z-40 border-b-2 border-gray-200 dark:border-zinc-700">
       <Logo />
 
       <div className="hidden md:flex items-center gap-4">
@@ -72,7 +78,11 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
         className="md:hidden block"
         aria-controls="mobile-listings-aside"
       >
-        <Menu size={28} className="text-secondary-800 dark:text-blue-100" />
+        {!open ? (
+          <Menu size={28} className="text-secondary-800 dark:text-blue-100" />
+        ) : (
+          <X size={28} className="text-secondary-800 dark:text-blue-100" />
+        )}
       </button>
       <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 max-md:hidden hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300">
         <PhoneIcon size={20} />
