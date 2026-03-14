@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Menu, PhoneIcon, X } from "lucide-react";
 import Logo from "../ClientRender/Logo";
+import HamburgerX from "../Icons/menu";
 
 export default function TopNav({
   open,
@@ -73,17 +74,9 @@ export default function TopNav({
       </div>
 
       {/* Mobile Menu Button */}
-      <button
-        onClick={onMenuClick}
-        className="md:hidden block"
-        aria-controls="mobile-listings-aside"
-      >
-        {!open ? (
-          <Menu size={28} className="text-secondary-800 dark:text-blue-100" />
-        ) : (
-          <X size={28} className="text-secondary-800 dark:text-blue-100" />
-        )}
-      </button>
+
+      <HamburgerX open={open} onMenuClick={onMenuClick} />
+
       <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 max-md:hidden hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300">
         <PhoneIcon size={20} />
         <a className=" text-sm font-semibold " href="tel:(437) 505-2388">
