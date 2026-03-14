@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../Nav/Sidebar";
 import TopNav from "../Nav/TopNav";
 import { usePathname } from "next/navigation";
+import CarLoader from "../Loader/CarLoader";
 export default function PageShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -11,9 +12,12 @@ export default function PageShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
   return (
     <>
+      <CarLoader />
       <TopNav onMenuClick={() => setSidebarOpen(true)} />
 
-      <main className="min-h-screen  ">{children}</main>
+      <main className="min-h-screen bg-background dark:bg-zinc-900  ">
+        {children}
+      </main>
 
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
     </>

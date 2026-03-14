@@ -1,15 +1,26 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useLoading } from "@/components/Context/LoadingProvider";
+import Lottie from "lottie-react";
+import carLoader from "@/public/animations/Car-loader.json";
+export default function GlobalLoader() {
+  const { totalAssets, loadedAssets } = useLoading();
+  const loading = loadedAssets < totalAssets;
 
-export default function CarLoader() {
   return (
-    <div className="relative w-full h-24 overflow-hidden bg-gray-100 flex items-center">
-      <motion.img
-        src="/Logo.png"
-        alt="loading car"
-        className="w-24 absolute"
-        animate={{ x: ["-120%", "120%"] }} // move from left to right
-        transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-      />
-    </div>
+    <AnimatePresence>
+      {loading && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background dark:bg-gray-900"
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="w-100 h-100">
+            <Lottie animationData={carLoader} loop={true} autoplay={true} />
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

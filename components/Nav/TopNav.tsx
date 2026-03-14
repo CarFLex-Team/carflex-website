@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Menu } from "lucide-react";
+import { Menu, PhoneIcon } from "lucide-react";
+import Logo from "../ClientRender/Logo";
 
 export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
   const [activeSection, setActiveSection] = useState<string>("");
@@ -45,20 +46,19 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
     }
   };
   return (
-    <nav className="flex justify-between items-center min-h-17 px-6 sm:px-9 bg-gray-100 fixed w-full top-0 z-30 border-b-2 border-gray-200">
-      <img src="/Logo.png" alt="Carflex Logo" className="w-24" />
+    <nav className="flex justify-between items-center min-h-17 px-6 sm:px-9 bg-gray-100 dark:bg-zinc-800 fixed w-full top-0 z-30 border-b-2 border-gray-200 dark:border-zinc-700">
+      <Logo />
 
       <div className="hidden md:flex items-center gap-4">
         {navItems.map((item) => {
-          const id = item.href.startsWith("#") ? item.href.slice(1) : item.href;
           return (
             <a
               key={item.label}
               href={item.href} // can keep href for SEO/fallback
               onClick={handleScrollTo(item.href)} // smooth scroll without # in URL
-              className={`relative px-3 py-2 text-md font-medium text-secondary-800 transition-colors duration-200
+              className={`relative px-3 py-2 text-md font-medium text-secondary-800 dark:text-blue-100 transition-colors duration-200
         after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary-500 after:transition-all after:duration-300
-        ${activeSection === item.href ? "after:w-full" : "after:w-0 hover:after:w-full hover:bg-gray-200"}`}
+        ${activeSection === item.href ? "after:w-full" : "after:w-0 hover:after:w-full hover:bg-gray-200 dark:hover:bg-zinc-700"}`}
             >
               {item.label}
             </a>
@@ -74,6 +74,12 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <Menu size={28} />
       </button>
+      <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100">
+        <PhoneIcon size={20} />
+        <a className=" text-sm font-semibold" href="tel:(437) 505-2388">
+          (437) 505-2388
+        </a>
+      </div>
     </nav>
   );
 }

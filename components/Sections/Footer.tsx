@@ -1,12 +1,13 @@
 "use client";
 
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import Logo from "../ClientRender/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-background text-secondary-800 py-10 px-4 md:px-15">
+    <footer className=" text-secondary-800 dark:text-blue-100 py-10 px-4 md:px-15">
       <div className="flex justify-center md:justify-center border-b border-gray-700 pb-10 mb-10 mx-3">
-        <img src="/Logo.png" alt="Carflex Logo" className="h-12" />
+        <Logo />
       </div>
 
       <div className=" w-full px-3  flex flex-col md:flex-row justify-between  gap-8 md:gap-2">

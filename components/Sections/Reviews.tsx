@@ -5,6 +5,7 @@ import SellCarContainer from "./SellCarContainer";
 import GoogleIcon from "../Icons/googleIcon";
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import TrackedImage from "../ClientRender/TrackedImage";
 
 export default function Reviews() {
   const reviews = [
@@ -68,15 +69,15 @@ thankyou`,
       id="reviews"
     >
       <div className="flex items-center justify-between  mt-15 mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 ">
+        <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 dark:text-blue-100">
           Our Customers
         </h1>
         <a
           href="https://maps.app.goo.gl/YFt5zTJs8dJy7o2i9"
           target="_blank"
-          className="flex items-center gap-2 text-secondary-800 font-medium hover:underline"
+          className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 font-medium hover:underline"
         >
-          <p className="text-secondary-800 text-lg font-semibold text-center">
+          <p className="text-secondary-800 dark:text-blue-100 text-lg font-semibold text-center">
             4.9
           </p>
           <Star fill="orange" stroke="none" size={20} />
@@ -99,7 +100,7 @@ thankyou`,
             {loopReviews.map((review, index) => (
               <div
                 key={index}
-                className="flex-none w-60 md:w-80 bg-white rounded-lg border border-secondary-800 shadow-md p-4"
+                className="flex-none w-60 md:w-80 bg-white dark:bg-zinc-800 rounded-lg border border-secondary-800 shadow-md p-4"
               >
                 <img
                   src={review.image}
@@ -116,11 +117,13 @@ thankyou`,
                   </span>
                   <GoogleIcon width={16} height={16} />
                 </div>
-                <p className="text-gray-700 mb-4 text-sm line-clamp-4">
+                <p className="text-gray-700 mb-4 text-sm line-clamp-4 dark:text-gray-400">
                   {review.text}
                 </p>
-                <p className="font-semibold">{review.name}</p>
-                <p className="text-gray-400 text-sm">{review.city}</p>
+                <p className="font-semibold dark:text-white">{review.name}</p>
+                <p className="text-gray-400 dark:text-blue-100 text-sm">
+                  {review.city}
+                </p>
               </div>
             ))}
           </motion.div>

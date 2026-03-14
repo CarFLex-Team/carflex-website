@@ -9,7 +9,7 @@ export default function ToggleButton({
 }) {
   return (
     <button
-      className={`p-2 text-center w-full rounded-full cursor-pointer z-10  ${selected ? " text-white font-medium" : "text-secondary-400"}`}
+      className={`p-2 text-center w-full rounded-full cursor-pointer z-10  ${selected ? " text-white font-medium" : "text-secondary-400 dark:text-gray-400"}`}
       onClick={onClick}
     >
       {children}

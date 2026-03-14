@@ -4,12 +4,12 @@ export default function Contact() {
       className="flex flex-col justify-center mt-3 px-5 sm:px-8 md:px-15 bg-secondary-800 py-10"
       id="contact"
     >
-      <h1 className="text-3xl md:text-4xl font-bold text-background mb-10 ">
+      <h1 className="text-3xl md:text-4xl font-bold text-background dark:text-blue-100 mb-10 ">
         Contact Us
       </h1>
       <div className="flex flex-col md:flex-row  justify-center gap-8 md:gap-15">
         <div className="flex flex-col max-md:items-center justify-between mb-10 w-full md:w-1/2 gap-3">
-          <h3 className="text-xl font-semibold text-background  text-left w-full">
+          <h3 className="text-xl font-semibold text-background dark:text-blue-100  text-left w-full">
             Submit a question
           </h3>
           <form className="flex flex-col items-center justify-between mb-10 w-full  gap-2">
@@ -17,27 +17,27 @@ export default function Contact() {
               type="text"
               name=""
               id=""
-              className="p-4 bg-white w-full"
+              className="p-4 bg-white dark:bg-zinc-800 dark:text-gray-300 w-full"
               placeholder="Full Name"
             />
             <input
               type="email"
               name=""
               id=""
-              className="p-4 bg-white w-full"
+              className="p-4 bg-white dark:bg-zinc-800 dark:text-gray-300 w-full"
               placeholder="Email"
             />
             <input
               type="tel"
               name=""
               id=""
-              className="p-4 bg-white w-full"
+              className="p-4 bg-white dark:bg-zinc-800 dark:text-gray-300 w-full"
               placeholder="Phone Number"
             />
             <textarea
               name=""
               id=""
-              className="p-4 bg-white w-full h-24"
+              className="p-4 bg-white dark:bg-zinc-800 dark:text-gray-300 w-full h-24"
               placeholder="Your Message
               
 
@@ -53,7 +53,7 @@ export default function Contact() {
           </form>
         </div>
         <div className="flex flex-col  mb-10 w-full md:w-1/2 gap-3">
-          <h3 className="text-xl font-semibold text-background  text-left w-full">
+          <h3 className="text-xl font-semibold text-background dark:text-blue-100  text-left w-full">
             Contact us directly
           </h3>
           <div>

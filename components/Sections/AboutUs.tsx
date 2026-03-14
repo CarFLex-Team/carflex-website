@@ -13,7 +13,7 @@ export default function AboutUs() {
         id="about"
       >
         <div className="flex items-center justify-between mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-background ">
+          <h1 className="text-3xl md:text-4xl font-bold text-background dark:text-blue-100">
             Why Carflex Plus?
           </h1>
         </div>
@@ -36,9 +36,9 @@ export default function AboutUs() {
           />
         </div>
       </div>
-      <div className="flex flex-col justify-center my-3 px-5 sm:px-8 md:px-15 bg-background py-15">
+      <div className="flex flex-col justify-center my-3 px-5 sm:px-8 md:px-15 py-15">
         <div className="flex items-center justify-between mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 ">
+          <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 dark:text-blue-100">
             How it Works
           </h1>
         </div>
@@ -88,7 +88,7 @@ export default function AboutUs() {
 
       <div className="overflow-hidden whitespace-nowrap  py-1">
         <motion.div
-          className="inline-block text-secondary-800 text-2xl md:text-3xl font-bold"
+          className="inline-block text-secondary-800 dark:text-blue-200/50 text-2xl md:text-xl font-bold"
           animate={{ x: ["0%", "-100%"] }}
           transition={{
             x: {

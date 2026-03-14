@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+import TrackedImage from "../ClientRender/TrackedImage";
 
 export default function Sidebar({
   open,
