@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, PhoneIcon, X } from "lucide-react";
 import Logo from "../ClientRender/Logo";
 import HamburgerX from "../Icons/menu";
+import { useRouter } from "next/navigation";
 
 export default function TopNav({
   open,
@@ -12,7 +13,7 @@ export default function TopNav({
   onMenuClick: () => void;
 }) {
   const [activeSection, setActiveSection] = useState<string>("");
-
+  const router = useRouter();
   const navItems = [
     { label: "Home", href: "home" },
     { label: "Reviews", href: "reviews" },
@@ -44,12 +45,18 @@ export default function TopNav({
   }, []);
   const handleScrollTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    const section = document.getElementById(id);
-    if (section) {
-      const yOffset = -100; // sticky nav offset
-      const y =
-        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    if (window.location.pathname !== "/") {
+      // Navigate to home first
+      router.push("/");
+    } else {
+      // Already on home, just scroll
+      const section = document.getElementById(id);
+      if (section) {
+        const yOffset = -100;
+        const y =
+          section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
   };
   return (
@@ -61,8 +68,8 @@ export default function TopNav({
           return (
             <a
               key={item.label}
-              href={item.href} // can keep href for SEO/fallback
-              onClick={handleScrollTo(item.href)} // smooth scroll without # in URL
+              href={item.href}
+              onClick={handleScrollTo(item.href)}
               className={`relative px-3 py-2 text-md font-medium  transition-colors duration-200
         after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary-500 dark:after:bg-primary-600 after:transition-all after:duration-300
         ${activeSection === item.href ? "after:w-full text-secondary-800 dark:text-blue-100" : "after:w-0 hover:after:w-full text-gray-700 dark:text-gray-400 hover:text-secondary-800 dark:hover:text-blue-100 "}`}

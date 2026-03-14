@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function VehicleDetailsForm() {
   return (
     <form action="" className="flex flex-col md:flex-row items-center gap-4">
@@ -39,9 +40,12 @@ export default function VehicleDetailsForm() {
         placeholder="Postal Code"
         className="p-4 rounded-full w-full text-background border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary-400 bg-secondary-800/40"
       />
-      <button className="p-4 w-full rounded-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90 text-xl font-medium transition-colors duration-300 cursor-pointer">
+      <Link
+        href="/sell-car"
+        className="p-4 w-full rounded-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90 text-xl font-medium transition-colors duration-300 cursor-pointer"
+      >
         Get Offer
-      </button>
+      </Link>
     </form>
   );
 }
