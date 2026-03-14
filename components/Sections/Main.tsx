@@ -2,16 +2,16 @@
 import SellCarContainer from "./SellCarContainer";
 import { motion } from "framer-motion";
 import { Anton } from "next/font/google";
-import AnimatedRating from "../Cards/AnimatedRating";
-import { useLoading } from "../Context/LoadingProvider";
-import { useEffect } from "react";
+
+import { useInView } from "react-intersection-observer";
 const anton = Anton({ subsets: ["latin"], weight: "400" });
 
 export default function Main() {
-  const { registerAsset, assetLoaded } = useLoading();
-  useEffect(() => {
-    registerAsset();
-  }, []);
+  const { ref, inView } = useInView({
+    triggerOnce: true, // animate only once
+    threshold: 0.3, // trigger when 30% visible
+  });
+
   return (
     <>
       <div
@@ -26,48 +26,34 @@ export default function Main() {
           muted
           playsInline
           preload="auto"
-          onLoadedMetadata={(e) => {
-            const video = e.currentTarget;
-            // readyState 4 = HAVE_ENOUGH_DATA (enough data to play)
-            if (video.readyState >= 4) {
-              assetLoaded();
-            }
-          }}
-          onCanPlay={(e) => {
-            const video = e.currentTarget;
-            if (video.readyState >= 4) {
-              assetLoaded();
-            }
-          }}
-          onError={assetLoaded}
         />
 
         <div className="relative z-10 flex flex-col w-full gap-10">
           <div
+            ref={ref}
             className={`flex flex-col gap-4 ml-2 md:ml-10 ${anton.className}`}
           >
             <motion.h1
               initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className={`text-7xl  text-white `}
+              className={`md:text-7xl text-5xl text-white `}
             >
               SELL YOUR CAR
             </motion.h1>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-7xl  text-white "
+              className="md:text-7xl text-5xl  text-white "
             >
-              WITH ONLY <span className="text-secondary-400">A CLICK</span>
+              ONLY <span className="text-secondary-400">A CLICK AWAY</span>
             </motion.h1>
-            <AnimatedRating />
           </div>
         </div>
       </div>
 
-      <div className="relative -mt-25 z-10 flex items-center justify-center px-3 sm:px-8 md:px-15 ">
+      <div className="relative sm:-mt-25 -mt-10 z-10 flex items-center justify-center px-3 sm:px-8 md:px-15 ">
         <SellCarContainer />
       </div>
     </>

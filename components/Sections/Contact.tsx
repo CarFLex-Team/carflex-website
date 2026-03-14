@@ -45,7 +45,7 @@ export default function Contact() {
             />
 
             <button
-              className="bg-primary-500 text-white py-2 px-4 rounded hover:bg-primary-500/90 w-full cursor-pointer transition-colors duration-300 text-xl font-medium"
+              className="bg-primary-500 dark:bg-primary-600 text-white py-2 px-4 rounded hover:bg-primary-500/90 dark:hover:bg-primary-600/90 w-full cursor-pointer transition-colors duration-300 text-xl font-medium"
               type="submit"
             >
               Submit
@@ -63,19 +63,22 @@ export default function Contact() {
             <p className="text-gray-300 text-md mb-2">
               Weekends 10 am - 6 pm EDT
             </p>
-            <a
-              className="text-gray-300 text-md mb-2 underline underline-offset-4 hover:no-underline block "
-              href="tel:(437) 505-2388"
-            >
-              (437) 505-2388
-            </a>
-
-            <a
-              className="text-gray-300 text-md mb-2 underline underline-offset-4 hover:no-underline block "
-              href="mailto:info@carflexplus.ca"
-            >
-              info@carflexplus.ca
-            </a>
+            <div className="my-3">
+              <a
+                className="text-gray-300 text-md mb-2 underline underline-offset-4 hover:no-underline hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300  "
+                href="tel:(437) 505-2388"
+              >
+                (437) 505-2388
+              </a>
+            </div>
+            <div>
+              <a
+                className="text-gray-300 text-md mb-2 underline underline-offset-4 hover:no-underline hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300  "
+                href="mailto:info@carflexplus.ca"
+              >
+                info@carflexplus.ca
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import GoogleIcon from "../Icons/googleIcon";
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import TrackedImage from "../ClientRender/TrackedImage";
+import AnimatedRating from "../Cards/AnimatedRating";
 
 export default function Reviews() {
   const reviews = [
@@ -68,20 +69,11 @@ thankyou`,
       className="  flex flex-col justify-center px-3 sm:px-8 md:px-15 "
       id="reviews"
     >
-      <div className="flex items-center justify-between  mt-15 mb-10">
+      <div className="flex items-center justify-between sm:flex-row flex-col  mt-15 mb-10">
         <h1 className="text-3xl md:text-4xl font-bold text-secondary-800 dark:text-blue-100">
           Our Customers
         </h1>
-        <a
-          href="https://maps.app.goo.gl/YFt5zTJs8dJy7o2i9"
-          target="_blank"
-          className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 font-medium hover:underline"
-        >
-          <p className="text-secondary-800 dark:text-blue-100 text-lg font-semibold text-center">
-            4.9
-          </p>
-          <Star fill="orange" stroke="none" size={20} />
-        </a>
+        <AnimatedRating />
       </div>
       <div className=" items-center gap-4">
         <div className="overflow-hidden relative w-full">

@@ -56,9 +56,9 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
               key={item.label}
               href={item.href} // can keep href for SEO/fallback
               onClick={handleScrollTo(item.href)} // smooth scroll without # in URL
-              className={`relative px-3 py-2 text-md font-medium text-secondary-800 dark:text-blue-100 transition-colors duration-200
-        after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary-500 after:transition-all after:duration-300
-        ${activeSection === item.href ? "after:w-full" : "after:w-0 hover:after:w-full hover:bg-gray-200 dark:hover:bg-zinc-700"}`}
+              className={`relative px-3 py-2 text-md font-medium  transition-colors duration-200
+        after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary-500 dark:after:bg-primary-600 after:transition-all after:duration-300
+        ${activeSection === item.href ? "after:w-full text-secondary-800 dark:text-blue-100" : "after:w-0 hover:after:w-full text-gray-700 dark:text-gray-400 hover:text-secondary-800 dark:hover:text-blue-100 "}`}
             >
               {item.label}
             </a>
@@ -72,11 +72,11 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
         className="md:hidden block"
         aria-controls="mobile-listings-aside"
       >
-        <Menu size={28} />
+        <Menu size={28} className="text-secondary-800 dark:text-blue-100" />
       </button>
-      <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100">
+      <div className="flex items-center gap-2 text-secondary-800 dark:text-blue-100 max-md:hidden hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300">
         <PhoneIcon size={20} />
-        <a className=" text-sm font-semibold" href="tel:(437) 505-2388">
+        <a className=" text-sm font-semibold " href="tel:(437) 505-2388">
           (437) 505-2388
         </a>
       </div>

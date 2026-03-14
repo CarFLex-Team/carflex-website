@@ -2,31 +2,42 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 import GoogleIcon from "../Icons/googleIcon";
 
 export default function AnimatedRating() {
-  const rating = 4.9; // final rating
+  const rating = 4.9;
   const totalStars = 5;
   const [displayRating, setDisplayRating] = useState(0);
   const [activeStars, setActiveStars] = useState<number>(0);
 
+  // Intersection Observer
+  const { ref, inView } = useInView({
+    triggerOnce: true, // animate only once
+    threshold: 0.5, // component is considered in view when 50% visible
+  });
+
   // Animate number
   useEffect(() => {
+    if (!inView) return; // do nothing until visible
+
     let start = 0;
-    const increment = rating / 100; // animate in 100 steps
+    const increment = rating / 130;
     const interval = setInterval(() => {
       start += increment;
       if (start >= rating) {
         start = rating;
         clearInterval(interval);
       }
-      setDisplayRating(parseFloat(start.toFixed(1))); // one decimal
+      setDisplayRating(parseFloat(start.toFixed(1)));
     }, 20);
     return () => clearInterval(interval);
-  }, [rating]);
+  }, [inView, rating]);
 
-  // Animate stars one by one
+  // Animate stars
   useEffect(() => {
+    if (!inView) return; // do nothing until visible
+
     let current = 0;
     const interval = setInterval(() => {
       current += 1;
@@ -35,12 +46,13 @@ export default function AnimatedRating() {
         current = Math.floor(rating);
       }
       setActiveStars(current);
-    }, 150); // 150ms between each star
+    }, 150);
     return () => clearInterval(interval);
-  }, [rating]);
+  }, [inView, rating]);
 
   return (
     <a
+      ref={ref} // <-- attach ref to component
       className="flex items-center gap-2"
       href="https://maps.app.goo.gl/YFt5zTJs8dJy7o2i9"
       target="_blank"
@@ -67,7 +79,7 @@ export default function AnimatedRating() {
       <motion.p
         className="text-white text-lg font-medium"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: inView ? 1 : 0 }}
         transition={{ delay: 0.5 }}
       >
         {displayRating.toFixed(1)}

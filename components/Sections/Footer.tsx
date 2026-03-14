@@ -12,13 +12,22 @@ export default function Footer() {
 
       <div className=" w-full px-3  flex flex-col md:flex-row justify-between  gap-8 md:gap-2">
         <div className="flex flex-col space-y-2">
-          <a href="#about" className="hover:text-orange-500 no-underline">
+          <a
+            href="#about"
+            className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300 no-underline"
+          >
             ABOUT US
           </a>
-          <a href="/faq" className="hover:text-orange-500 no-underline">
+          <a
+            href="/faq"
+            className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300 no-underline"
+          >
             FAQ
           </a>
-          <a href="#contact" className="hover:text-orange-500 no-underline">
+          <a
+            href="#contact"
+            className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300 no-underline"
+          >
             CONTACT
           </a>
         </div>
@@ -27,13 +36,13 @@ export default function Footer() {
           <span className="font-semibold">CUSTOMER SERVICE</span>
           <a
             href="mailto:info@carflexplus.ca"
-            className="hover:text-orange-500 no-underline"
+            className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300 no-underline"
           >
             info@carflexplus.ca
           </a>
           <a
             href="tel:(437) 505-2388"
-            className="hover:text-orange-500 no-underline"
+            className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300 no-underline"
           >
             (437) 505-2388
           </a>
@@ -47,7 +56,7 @@ export default function Footer() {
               href="https://www.facebook.com/carflexdealership/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-orange-500"
+              className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300  "
             >
               <FaFacebookF />
             </a>
@@ -55,7 +64,7 @@ export default function Footer() {
               href="https://www.google.com/maps/place/Carflex/@43.0118595,-81.1505021,17z/data=!3m1!4b1!4m6!3m5!1s0x882ef320ed67b729:0x6c532153755710d0!8m2!3d43.0118595!4d-81.1479272!16s%2Fg%2F11fvw9ngy8?entry=tts&g_ep=EgoyMDI2MDMwNC4xIPu8ASoASAFQAw%3D%3D&skid=926b4620-1963-4515-9e42-2c4b384411e6"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-orange-500"
+              className="hover:text-primary-500 dark:hover:text-primary-600 transition-colors duration-300  "
             >
               <FaGoogle />
             </a>

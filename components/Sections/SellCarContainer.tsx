@@ -22,7 +22,7 @@ export default function SellCarContainer() {
         </ToggleButton>
 
         <span
-          className={`absolute bottom-0 left-0 h-full bg-primary-500 rounded-full transition-all duration-300 w-1/2 ${selectedTab === "vehicle-details" ? "rounded-r-none " : "rounded-l-none "}`}
+          className={`absolute bottom-0 left-0 h-full bg-primary-500 dark:bg-primary-600 rounded-full transition-all duration-300 w-1/2 ${selectedTab === "vehicle-details" ? "rounded-r-none " : "rounded-l-none "}`}
           style={{
             transform:
               selectedTab === "vehicle-details"
