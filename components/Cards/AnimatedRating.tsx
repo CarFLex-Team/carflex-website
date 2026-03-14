@@ -77,7 +77,7 @@ export default function AnimatedRating() {
           ))}
       </div>
       <motion.p
-        className="text-white text-lg font-medium"
+        className=" text-secondary-800 dark:text-blue-100 text-lg font-semibold"
         initial={{ opacity: 0 }}
         animate={{ opacity: inView ? 1 : 0 }}
         transition={{ delay: 0.5 }}
