@@ -42,7 +42,7 @@ export default function AboutUs() {
             How it Works
           </h1>
         </div>
-        <div className="flex flex-col  items-center justify-center">
+        <div className="flex flex-col  items-center justify-center overflow-x-hidden">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
