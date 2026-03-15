@@ -1,7 +1,9 @@
+import SellForm from "@/components/Forms/SellForm";
+
 export default function SellCar() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold">Sell Your Car Page - Coming Soon!</h1>
+    <div className=" min-h-screen flex flex-col items-center  justify-center py-20 px-4">
+      <SellForm />
     </div>
   );
 }
