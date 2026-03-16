@@ -1,6 +1,9 @@
 import { Form } from "lucide-react";
 import FormRadio from "./FormComponents/FormRadio";
-
+import { useState } from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { AnimatePresence, motion } from "framer-motion";
 export default function FirstSellForm({
   mileage,
   setMileage,
@@ -20,6 +23,15 @@ export default function FirstSellForm({
   colour: string;
   setColour: (value: string) => void;
 }) {
+  const [selectedTab, setSelectedTab] = useState("vehicle-details");
+
+  const formatNumber = (value: string) => {
+    // Remove non-digits
+    const numericValue = value.replace(/\D/g, "");
+    if (!numericValue) return "";
+    // Add commas
+    return parseInt(numericValue).toLocaleString();
+  };
   return (
     <>
       <h2 className="text-4xl font-bold text-secondary-800 dark:text-blue-100 ">
@@ -31,9 +43,11 @@ export default function FirstSellForm({
         </label>
         <div className="relative">
           <input
-            type="number"
+            type="text"
             value={mileage}
-            onChange={(e) => setMileage(e.target.value)}
+            onChange={(e) => setMileage(formatNumber(e.target.value))}
+            inputMode="numeric"
+            pattern="\d*"
             placeholder="120,000"
             className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2
              focus:ring-secondary-800 dark:focus:ring-blue-100 bg-background dark:bg-zinc-900 border
@@ -61,6 +75,34 @@ export default function FirstSellForm({
         label="Are you the sole owner of this vehicle?"
       />
 
+      <AnimatePresence>
+        {soleOwner === "no" && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <label className="block text-secondary-800 dark:text-blue-100 font-medium">
+              What's the approximate mileage on your car?
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                value={mileage}
+                onChange={(e) => setMileage(formatNumber(e.target.value))}
+                placeholder="0"
+                className="p-4 rounded-md w-full border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900 text-secondary-800 dark:text-blue-100
+                  focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
+                inputMode="numeric"
+                pattern="\d*"
+              />
+              <span className="absolute right-4 top-4 text-gray-500">km</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <div className="space-y-2">
         <label className="block text-secondary-800 dark:text-blue-100">
           What colour is your vehicle?
