@@ -1,6 +1,6 @@
 import { PhoneIcon, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar({
   open,
@@ -9,7 +9,7 @@ export default function Sidebar({
   open: boolean;
   setOpen: (open: boolean) => void;
 }) {
-  const [activeSection, setActiveSection] = useState<string>("");
+  const router = useRouter();
   const navItems = [
     { label: "Home", href: "home" },
     { label: "Reviews", href: "reviews" },
@@ -18,12 +18,18 @@ export default function Sidebar({
   ];
   const handleScrollTo = (id: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    const section = document.getElementById(id);
-    if (section) {
-      const yOffset = -100; // sticky nav offset
-      const y =
-        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+    if (window.location.pathname !== "/") {
+      // Navigate to home first
+      router.push("/");
+    } else {
+      // Already on home, just scroll
+      const section = document.getElementById(id);
+      if (section) {
+        const yOffset = -100;
+        const y =
+          section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
     setOpen(false);
   };

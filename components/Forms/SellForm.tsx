@@ -68,6 +68,7 @@ export default function CarInfoForm() {
       isDrivable,
       hasAccident,
       totalClaims,
+      condition,
     };
     console.log("Form Submitted:", formData);
   };
