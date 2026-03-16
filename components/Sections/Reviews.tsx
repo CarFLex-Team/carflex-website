@@ -39,7 +39,7 @@ export default function Reviews() {
       name: "Mo Go",
       city: "London, ON",
       text: "Super low km car at an even nicer price! Thank you so much. Runs great. I recommend anyone looking for a used car , suv, or truck to look here first",
-      image: "/imgs/MoGo.jpg",
+      image: "/imgs/MOGO.jpg",
       stars: 5,
     },
     {
