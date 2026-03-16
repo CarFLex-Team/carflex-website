@@ -4,22 +4,24 @@ export default function FormCheckBox({
   value,
   onChange,
   label,
+  isFlex = false,
 }: {
   options: string[];
   value: string[];
   onChange: React.Dispatch<React.SetStateAction<string[]>>;
   label: string;
+  isFlex?: boolean;
 }) {
   return (
     <div className="space-y-2">
       <label className="block text-secondary-800 dark:text-blue-100 font-medium">
         {label}
       </label>
-      <div className="space-y-2">
+      <div className={`${isFlex ? "flex flex-wrap gap-2" : "space-y-2 "} `}>
         {options.map((option) => (
           <label
             key={option}
-            className={`flex items-center p-4 rounded-md border  bg-background
+            className={`flex flex-1 items-center p-4 rounded-md border  bg-background
                     dark:bg-zinc-900 text-secondary-800 dark:text-blue-100 cursor-pointer
                     hover:border-secondary-800 dark:hover:border-blue-100 transition-colors ${value.includes(option) ? "border-secondary-800 dark:border-blue-100" : "border-gray-300 dark:border-gray-700"}`}
           >

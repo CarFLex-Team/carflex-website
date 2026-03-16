@@ -2,6 +2,7 @@ import toggleOption from "@/lib/toggleOptions";
 import FormSelect from "./FormComponents/FormSelect";
 import FormCheckBox from "./FormComponents/FormCheckBox";
 import FormRadio from "./FormComponents/FormRadio";
+import { AnimatePresence, motion } from "framer-motion";
 export default function ThirdSellForm({
   exteriorDamage,
   setExteriorDamage,
@@ -17,6 +18,10 @@ export default function ThirdSellForm({
   setTiresReplaced,
   tiresKind,
   setTiresKind,
+  mechanicalIssuesFound,
+  setMechanicalIssuesFound,
+  mechanicalIssues,
+  setMechanicalIssues,
 }: {
   exteriorDamage: string[];
   setExteriorDamage: React.Dispatch<React.SetStateAction<string[]>>;
@@ -25,13 +30,17 @@ export default function ThirdSellForm({
   disclosures: string[];
   setDisclosures: React.Dispatch<React.SetStateAction<string[]>>;
   numberOfTires: string;
-  setNumberOfTires: React.Dispatch<React.SetStateAction<string>>;
+  setNumberOfTires: (value: string) => void;
   keys: string;
-  setKeys: React.Dispatch<React.SetStateAction<string>>;
+  setKeys: (value: string) => void;
   tiresReplaced: string;
-  setTiresReplaced: React.Dispatch<React.SetStateAction<string>>;
+  setTiresReplaced: (value: string) => void;
   tiresKind: string;
-  setTiresKind: React.Dispatch<React.SetStateAction<string>>;
+  setTiresKind: (value: string) => void;
+  mechanicalIssuesFound: string;
+  setMechanicalIssuesFound: (value: string) => void;
+  mechanicalIssues: string[];
+  setMechanicalIssues: React.Dispatch<React.SetStateAction<string[]>>;
 }) {
   const exteriorDamageOptions = [
     "Minor cosmetic damage",
@@ -109,6 +118,46 @@ export default function ThirdSellForm({
         onChange={setTiresKind}
         label="What kind of tires are currently on your car?"
       />
+      <FormRadio
+        options={[
+          { label: "Yes", value: "yes" },
+          {
+            label: "No mechanical issues or warning lights",
+            value: "no",
+          },
+        ]}
+        value={mechanicalIssuesFound}
+        onChange={setMechanicalIssuesFound}
+        label="Do you have any mechanical issues with your vehicle?"
+      />
+      <AnimatePresence>
+        {mechanicalIssuesFound === "yes" && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-4"
+          >
+            <FormCheckBox
+              options={[
+                "Engine",
+                "Transmission",
+                "Brakes",
+                "Exhaust",
+                "Suspension",
+                "Airbag",
+                "Battery",
+                "Tire Pressure System",
+              ]}
+              value={mechanicalIssues}
+              onChange={setMechanicalIssues}
+              label="Please select any mechanical issues you are experiencing"
+              isFlex={true}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

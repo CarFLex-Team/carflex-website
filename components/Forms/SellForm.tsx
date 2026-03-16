@@ -26,6 +26,9 @@ export default function CarInfoForm() {
   const [loanOrLease, setLoanOrLease] = useState("no");
   const [loanCompany, setLoanCompany] = useState("");
   const [loanBalance, setLoanBalance] = useState("");
+  const [mechanicalIssuesFound, setMechanicalIssuesFound] =
+    useState<string>("");
+  const [mechanicalIssues, setMechanicalIssues] = useState<string[]>([]);
   const nextStep = () => {
     setStep((prev) => Math.min(prev + 1, 3));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -37,6 +40,9 @@ export default function CarInfoForm() {
 
   const handleSubmit = () => {
     const formData = {
+      year,
+      make,
+      model,
       mileage,
       transmission,
       soleOwner,
@@ -45,6 +51,14 @@ export default function CarInfoForm() {
       features,
       extraFeatures,
       loanOrLease,
+      loanCompany,
+      loanBalance,
+      interiorDamage,
+      disclosures,
+      numberOfTires,
+      keys,
+      tiresReplaced,
+      tiresKind,
     };
     console.log("Form Submitted:", formData);
   };
@@ -105,6 +119,10 @@ export default function CarInfoForm() {
             setTiresReplaced={setTiresReplaced}
             tiresKind={tiresKind}
             setTiresKind={setTiresKind}
+            mechanicalIssuesFound={mechanicalIssuesFound}
+            setMechanicalIssuesFound={setMechanicalIssuesFound}
+            mechanicalIssues={mechanicalIssues}
+            setMechanicalIssues={setMechanicalIssues}
           />
         )}
         <div className="flex justify-between flex-wrap gap-5">

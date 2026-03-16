@@ -9,7 +9,7 @@ export default function SecondSellForm({
   features: string[];
   setFeatures: React.Dispatch<React.SetStateAction<string[]>>;
   extraFeatures: string;
-  setExtraFeatures: React.Dispatch<React.SetStateAction<string>>;
+  setExtraFeatures: (value: string) => void;
 }) {
   const featuresOptions = [
     "Aftermarket rims",
