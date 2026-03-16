@@ -1,4 +1,3 @@
-import toggleOption from "@/lib/toggleOptions";
 import FormCheckBox from "./FormComponents/FormCheckBox";
 
 export default function SecondSellForm({
@@ -42,6 +41,7 @@ export default function SecondSellForm({
           <input
             type="text"
             value={extraFeatures}
+            name="extraFeatures"
             onChange={(e) => setExtraFeatures(e.target.value)}
             placeholder="Write any additional features or modifications here"
             className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2

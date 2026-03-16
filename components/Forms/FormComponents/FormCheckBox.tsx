@@ -26,6 +26,7 @@ export default function FormCheckBox({
             <input
               type="checkbox"
               checked={value.includes(option)}
+              name={option}
               onChange={() => toggleOption(option, onChange)}
               className="mr-4 w-5 h-5 accent-secondary-800 dark:accent-primary-600 rounded focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
             />

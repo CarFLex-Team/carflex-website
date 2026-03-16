@@ -17,6 +17,7 @@ export default function FormSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        name={label}
         className="p-4 w-full rounded-md border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900 text-secondary-800 dark:text-blue-100
           focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
       >

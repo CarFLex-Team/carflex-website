@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function VinForm() {
   return (
-    <form action="" className="flex flex-col md:flex-row items-center gap-4">
+    <form className="flex flex-col md:flex-row items-center gap-4">
       <input
         type="text"
         placeholder="Enter VIN"

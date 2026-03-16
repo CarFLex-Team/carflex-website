@@ -57,11 +57,7 @@ export default function CarInfoForm() {
           />
         ))}
       </div>
-      <form
-        ref={formRef}
-        className="pt-20 w-3/5 space-y-6"
-        onSubmit={handleSubmit}
-      >
+      <form ref={formRef} className="pt-20 w-3/5 space-y-6">
         {/* Basic Info */}
         {step === 1 && (
           <FirstSellForm
@@ -122,6 +118,7 @@ export default function CarInfoForm() {
           ) : (
             <button
               type="button"
+              onClick={handleSubmit}
               className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
             >
               Get an Offer

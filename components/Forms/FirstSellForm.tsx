@@ -69,6 +69,7 @@ export default function FirstSellForm({
           <input
             type="text"
             value={colour}
+            name="Colour"
             onChange={(e) => setColour(e.target.value)}
             placeholder="e.g., Red, Blue, Black"
             className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2
