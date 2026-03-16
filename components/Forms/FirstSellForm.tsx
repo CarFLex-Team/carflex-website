@@ -1,8 +1,7 @@
 import { Form } from "lucide-react";
 import FormRadio from "./FormComponents/FormRadio";
 import { useState } from "react";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
 import { AnimatePresence, motion } from "framer-motion";
 export default function FirstSellForm({
   mileage,
