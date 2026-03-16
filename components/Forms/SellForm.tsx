@@ -23,6 +23,9 @@ export default function CarInfoForm() {
   const [keys, setKeys] = useState("");
   const [tiresReplaced, setTiresReplaced] = useState("");
   const [tiresKind, setTiresKind] = useState("");
+  const [loanOrLease, setLoanOrLease] = useState("no");
+  const [loanCompany, setLoanCompany] = useState("");
+  const [loanBalance, setLoanBalance] = useState("");
   const nextStep = () => {
     setStep((prev) => Math.min(prev + 1, 3));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -41,6 +44,7 @@ export default function CarInfoForm() {
       exteriorDamage,
       features,
       extraFeatures,
+      loanOrLease,
     };
     console.log("Form Submitted:", formData);
   };
@@ -69,6 +73,12 @@ export default function CarInfoForm() {
             setSoleOwner={setSoleOwner}
             colour={colour}
             setColour={setColour}
+            loanOrLease={loanOrLease}
+            setLoanOrLease={setLoanOrLease}
+            loanCompany={loanCompany}
+            setLoanCompany={setLoanCompany}
+            loanBalance={loanBalance}
+            setLoanBalance={setLoanBalance}
           />
         )}
         {step === 2 && (
