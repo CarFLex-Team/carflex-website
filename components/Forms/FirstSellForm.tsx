@@ -1,9 +1,8 @@
-import { Form } from "lucide-react";
 import FormRadio from "./FormComponents/FormRadio";
-import { useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import ThreeChoiceToggle from "../Buttons/ThreeToggleButton";
+import formatNumber from "../../lib/formatNumber";
 export default function FirstSellForm({
   mileage,
   setMileage,
@@ -13,8 +12,8 @@ export default function FirstSellForm({
   setSoleOwner,
   colour,
   setColour,
-  loanOrLease,
-  setLoanOrLease,
+  isLoan,
+  setIsLoan,
   loanCompany,
   setLoanCompany,
   loanBalance,
@@ -28,20 +27,13 @@ export default function FirstSellForm({
   setSoleOwner: (value: string) => void;
   colour: string;
   setColour: (value: string) => void;
-  loanOrLease: string;
-  setLoanOrLease: (value: string) => void;
+  isLoan: string;
+  setIsLoan: (value: string) => void;
   loanCompany: string;
   setLoanCompany: (value: string) => void;
   loanBalance: string;
   setLoanBalance: (value: string) => void;
 }) {
-  const formatNumber = (value: string) => {
-    // Remove non-digits
-    const numericValue = value.replace(/\D/g, "");
-    if (!numericValue) return "";
-    // Add commas
-    return parseInt(numericValue).toLocaleString();
-  };
   return (
     <>
       <h2 className="text-4xl font-bold text-secondary-800 dark:text-blue-100 ">
@@ -93,12 +85,12 @@ export default function FirstSellForm({
             { id: "no", label: "No" },
             { id: "loan", label: "Loan" },
           ]}
-          selectedTab={loanOrLease}
-          setSelectedTab={setLoanOrLease}
+          selectedTab={isLoan}
+          setSelectedTab={setIsLoan}
         />
       </div>
       <AnimatePresence>
-        {loanOrLease === "loan" && (
+        {isLoan === "loan" && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}

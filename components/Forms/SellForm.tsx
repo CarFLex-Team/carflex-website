@@ -23,12 +23,16 @@ export default function CarInfoForm() {
   const [keys, setKeys] = useState("");
   const [tiresReplaced, setTiresReplaced] = useState("");
   const [tiresKind, setTiresKind] = useState("");
-  const [loanOrLease, setLoanOrLease] = useState("no");
+  const [isLoan, setIsLoan] = useState("no");
   const [loanCompany, setLoanCompany] = useState("");
   const [loanBalance, setLoanBalance] = useState("");
   const [mechanicalIssuesFound, setMechanicalIssuesFound] =
     useState<string>("");
   const [mechanicalIssues, setMechanicalIssues] = useState<string[]>([]);
+  const [isDrivable, setIsDrivable] = useState<string>("" as "yes" | "no");
+  const [hasAccident, setHasAccident] = useState<string>("" as "yes" | "no");
+  const [totalClaims, setTotalClaims] = useState("");
+  const [condition, setCondition] = useState<string>("");
   const nextStep = () => {
     setStep((prev) => Math.min(prev + 1, 3));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -50,7 +54,7 @@ export default function CarInfoForm() {
       exteriorDamage,
       features,
       extraFeatures,
-      loanOrLease,
+      isLoan,
       loanCompany,
       loanBalance,
       interiorDamage,
@@ -59,6 +63,11 @@ export default function CarInfoForm() {
       keys,
       tiresReplaced,
       tiresKind,
+      mechanicalIssuesFound,
+      mechanicalIssues,
+      isDrivable,
+      hasAccident,
+      totalClaims,
     };
     console.log("Form Submitted:", formData);
   };
@@ -87,8 +96,8 @@ export default function CarInfoForm() {
             setSoleOwner={setSoleOwner}
             colour={colour}
             setColour={setColour}
-            loanOrLease={loanOrLease}
-            setLoanOrLease={setLoanOrLease}
+            isLoan={isLoan}
+            setIsLoan={setIsLoan}
             loanCompany={loanCompany}
             setLoanCompany={setLoanCompany}
             loanBalance={loanBalance}
@@ -123,6 +132,14 @@ export default function CarInfoForm() {
             setMechanicalIssuesFound={setMechanicalIssuesFound}
             mechanicalIssues={mechanicalIssues}
             setMechanicalIssues={setMechanicalIssues}
+            isDrivable={isDrivable}
+            setIsDrivable={setIsDrivable}
+            hasAccident={hasAccident}
+            setHasAccident={setHasAccident}
+            totalClaims={totalClaims}
+            setTotalClaims={setTotalClaims}
+            condition={condition}
+            setCondition={setCondition}
           />
         )}
         <div className="flex justify-between flex-wrap gap-5">

@@ -3,6 +3,7 @@ import FormSelect from "./FormComponents/FormSelect";
 import FormCheckBox from "./FormComponents/FormCheckBox";
 import FormRadio from "./FormComponents/FormRadio";
 import { AnimatePresence, motion } from "framer-motion";
+import formatNumber from "@/lib/formatNumber";
 export default function ThirdSellForm({
   exteriorDamage,
   setExteriorDamage,
@@ -22,6 +23,14 @@ export default function ThirdSellForm({
   setMechanicalIssuesFound,
   mechanicalIssues,
   setMechanicalIssues,
+  isDrivable,
+  setIsDrivable,
+  hasAccident,
+  setHasAccident,
+  totalClaims,
+  setTotalClaims,
+  condition,
+  setCondition,
 }: {
   exteriorDamage: string[];
   setExteriorDamage: React.Dispatch<React.SetStateAction<string[]>>;
@@ -41,6 +50,14 @@ export default function ThirdSellForm({
   setMechanicalIssuesFound: (value: string) => void;
   mechanicalIssues: string[];
   setMechanicalIssues: React.Dispatch<React.SetStateAction<string[]>>;
+  isDrivable: string;
+  setIsDrivable: (value: string) => void;
+  hasAccident: string;
+  setHasAccident: (value: string) => void;
+  totalClaims: string;
+  setTotalClaims: (value: string) => void;
+  condition: string;
+  setCondition: (value: string) => void;
 }) {
   const exteriorDamageOptions = [
     "Minor cosmetic damage",
@@ -158,6 +175,70 @@ export default function ThirdSellForm({
           </motion.div>
         )}
       </AnimatePresence>
+      <FormRadio
+        options={[
+          { label: "It's drivable", value: "yes" },
+          {
+            label: "It's not drivable",
+            value: "no",
+          },
+        ]}
+        value={isDrivable}
+        onChange={setIsDrivable}
+        label="Is your vehicle drivable?"
+      />
+      <FormRadio
+        options={[
+          { label: "None", value: "no" },
+          {
+            label: "Yes, I have had accidents or insurance claims",
+            value: "yes",
+          },
+        ]}
+        value={hasAccident}
+        onChange={setHasAccident}
+        label="Have you had any accidents or insurance claims?"
+      />
+      <AnimatePresence>
+        {hasAccident === "yes" && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-4"
+          >
+            <div className="space-y-2">
+              <label className="block text-secondary-800 dark:text-blue-100 font-medium">
+                What was the total cost of repairs for all accidents?
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={totalClaims}
+                  onChange={(e) => setTotalClaims(formatNumber(e.target.value))}
+                  className="p-4 rounded-md w-full border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900 text-secondary-800 dark:text-blue-100
+                focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
+                />
+                <span className="absolute right-4 top-4 text-gray-500">$</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <FormRadio
+        options={[
+          { label: "Poor", value: "poor" },
+          {
+            label: "Good",
+            value: "good",
+          },
+          { label: "Excellent", value: "excellent" },
+        ]}
+        value={condition}
+        onChange={setCondition}
+        label="What is the overall condition of your vehicle?"
+      />
     </>
   );
 }
