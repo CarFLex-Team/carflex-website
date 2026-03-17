@@ -1,4 +1,5 @@
 import FormCheckBox from "./FormComponents/FormCheckBox";
+import FormInput from "./FormComponents/FormInput";
 
 export default function SecondSellForm({
   features,
@@ -32,24 +33,12 @@ export default function SecondSellForm({
         onChange={setFeatures}
         label="Select any additional features your vehicle has"
       />
-
-      <div className="space-y-2">
-        <label className="block text-secondary-800 dark:text-blue-100">
-          Any other features or modifications not listed above?
-        </label>
-        <div>
-          <input
-            type="text"
-            value={extraFeatures}
-            name="extraFeatures"
-            onChange={(e) => setExtraFeatures(e.target.value)}
-            placeholder="Write any additional features or modifications here"
-            className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2
-             focus:ring-secondary-800 dark:focus:ring-blue-100 bg-background dark:bg-zinc-900 border
-             border-gray-300 dark:border-gray-700 text-secondary-800 dark:text-blue-100"
-          />
-        </div>
-      </div>
+      <FormInput
+        value={extraFeatures}
+        onChange={setExtraFeatures}
+        label="Any other features or modifications not listed above?"
+        placeholder="Write any additional features or modifications here"
+      />
     </>
   );
 }

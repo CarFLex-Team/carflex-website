@@ -57,17 +57,10 @@ export default function CarInfoForm() {
       }
     }
 
-    if (step === 2) {
-      if (features.length === 0 && extraFeatures.trim() === "")
-        newErrors.features = true;
-    }
-
     if (step === 3) {
-      if (!isDrivable) newErrors.isDrivable = true;
-      if (!hasAccident) newErrors.hasAccident = true;
-      if (!condition) newErrors.condition = true;
-      if (hasAccident === "yes" && totalClaims.trim() === "")
-        newErrors.totalClaims = true;
+      if (exteriorDamage.length === 0) newErrors.exteriorDamage = true;
+      if (interiorDamage.length === 0) newErrors.interiorDamage = true;
+      if (disclosures.length === 0) newErrors.disclosures = true;
       if (numberOfTires.trim() === "") newErrors.numberOfTires = true;
       if (keys.trim() === "") newErrors.keys = true;
       if (tiresReplaced.trim() === "") newErrors.tiresReplaced = true;
@@ -75,8 +68,11 @@ export default function CarInfoForm() {
       if (mechanicalIssuesFound === "") newErrors.mechanicalIssuesFound = true;
       if (mechanicalIssuesFound === "yes" && mechanicalIssues.length === 0)
         newErrors.mechanicalIssues = true;
-      if (exteriorDamage.length === 0) newErrors.exteriorDamage = true;
-      if (interiorDamage.length === 0) newErrors.interiorDamage = true;
+      if (!isDrivable) newErrors.isDrivable = true;
+      if (!hasAccident) newErrors.hasAccident = true;
+      if (!condition) newErrors.condition = true;
+      if (hasAccident === "yes" && totalClaims.trim() === "")
+        newErrors.totalClaims = true;
     }
 
     setErrors(newErrors);
@@ -84,6 +80,7 @@ export default function CarInfoForm() {
     return Object.keys(newErrors).length === 0; // true if no errors
   };
   const handleSubmit = () => {
+    if (!validateStep()) return;
     const formData = {
       year,
       make,
@@ -183,6 +180,7 @@ export default function CarInfoForm() {
             setTotalClaims={setTotalClaims}
             condition={condition}
             setCondition={setCondition}
+            errors={errors}
           />
         )}
         <div className="flex justify-between flex-wrap gap-5">

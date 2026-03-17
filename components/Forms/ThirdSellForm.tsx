@@ -4,6 +4,7 @@ import FormCheckBox from "./FormComponents/FormCheckBox";
 import FormRadio from "./FormComponents/FormRadio";
 import { AnimatePresence, motion } from "framer-motion";
 import formatNumber from "@/lib/formatNumber";
+import FormInput from "./FormComponents/FormInput";
 export default function ThirdSellForm({
   exteriorDamage,
   setExteriorDamage,
@@ -31,6 +32,7 @@ export default function ThirdSellForm({
   setTotalClaims,
   condition,
   setCondition,
+  errors,
 }: {
   exteriorDamage: string[];
   setExteriorDamage: React.Dispatch<React.SetStateAction<string[]>>;
@@ -58,6 +60,7 @@ export default function ThirdSellForm({
   setTotalClaims: (value: string) => void;
   condition: string;
   setCondition: (value: string) => void;
+  errors: { [key: string]: boolean };
 }) {
   const exteriorDamageOptions = [
     "Minor cosmetic damage",
@@ -98,42 +101,49 @@ export default function ThirdSellForm({
         value={exteriorDamage}
         onChange={setExteriorDamage}
         label="Does your vehicle have any exterior damage?"
+        error={errors.exteriorDamage}
       />
       <FormCheckBox
         options={interiorDamageOptions}
         value={interiorDamage}
         onChange={setInteriorDamage}
         label="Does your vehicle have any interior damage?"
+        error={errors.interiorDamage}
       />
       <FormCheckBox
         options={disclosureOptions}
         value={disclosures}
         onChange={setDisclosures}
         label="Any additional disclosures?"
+        error={errors.disclosures}
       />
       <FormSelect
         options={["1", "2 or more"]}
         value={keys}
         onChange={setKeys}
         label="Number of Keys"
+        error={errors.keys}
       />
       <FormSelect
         options={["1", "2 or more"]}
         value={numberOfTires}
         onChange={setNumberOfTires}
         label="Number of Tires"
+        error={errors.numberOfTires}
       />
       <FormRadio
         options={tiresReplacedOptions}
         value={tiresReplaced}
         onChange={setTiresReplaced}
         label="When did you replace your all-season tires?"
+        error={errors.tiresReplaced}
       />
       <FormRadio
         options={tiresKindOptions}
         value={tiresKind}
         onChange={setTiresKind}
         label="What kind of tires are currently on your car?"
+        error={errors.tiresKind}
       />
       <FormRadio
         options={[
@@ -146,6 +156,7 @@ export default function ThirdSellForm({
         value={mechanicalIssuesFound}
         onChange={setMechanicalIssuesFound}
         label="Do you have any mechanical issues with your vehicle?"
+        error={errors.mechanicalIssuesFound}
       />
       <AnimatePresence>
         {mechanicalIssuesFound === "yes" && (
@@ -186,6 +197,7 @@ export default function ThirdSellForm({
         value={isDrivable}
         onChange={setIsDrivable}
         label="Is your vehicle drivable?"
+        error={errors.isDrivable}
       />
       <FormRadio
         options={[
@@ -198,6 +210,7 @@ export default function ThirdSellForm({
         value={hasAccident}
         onChange={setHasAccident}
         label="Have you had any accidents or insurance claims?"
+        error={errors.hasAccident}
       />
       <AnimatePresence>
         {hasAccident === "yes" && (
@@ -208,21 +221,15 @@ export default function ThirdSellForm({
             transition={{ duration: 0.3 }}
             className="space-y-4"
           >
-            <div className="space-y-2">
-              <label className="block text-secondary-800 dark:text-blue-100 font-medium">
-                What was the total cost of repairs for all accidents?
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={totalClaims}
-                  onChange={(e) => setTotalClaims(formatNumber(e.target.value))}
-                  className="p-4 rounded-md w-full border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900 text-secondary-800 dark:text-blue-100
-                focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
-                />
-                <span className="absolute right-4 top-4 text-gray-500">$</span>
-              </div>
-            </div>
+            <FormInput
+              value={totalClaims}
+              onChange={setTotalClaims}
+              label="What was the total cost of repairs for all accidents?"
+              placeholder="5,000"
+              isFormatNumber={true}
+              error={errors.totalClaims}
+              icon="$"
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -238,6 +245,7 @@ export default function ThirdSellForm({
         value={condition}
         onChange={setCondition}
         label="What is the overall condition of your vehicle?"
+        error={errors.condition}
       />
     </>
   );

@@ -3,6 +3,7 @@ import FormRadio from "./FormComponents/FormRadio";
 import { AnimatePresence, motion } from "framer-motion";
 import ThreeChoiceToggle from "../Buttons/ThreeToggleButton";
 import formatNumber from "../../lib/formatNumber";
+import FormInput from "./FormComponents/FormInput";
 export default function FirstSellForm({
   mileage,
   setMileage,
@@ -41,32 +42,16 @@ export default function FirstSellForm({
       <h2 className="text-4xl font-bold text-secondary-800 dark:text-blue-100 ">
         Basic Info
       </h2>
-      <div className="space-y-2">
-        <label className="block text-secondary-800 dark:text-blue-100">
-          What's the approximate mileage on your car?
-        </label>
-        <div className="relative">
-          <input
-            type="text"
-            value={mileage}
-            onChange={(e) => {
-              setMileage(formatNumber(e.target.value));
-            }}
-            inputMode="numeric"
-            pattern="\d*"
-            placeholder="120,000"
-            className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2
-             focus:ring-secondary-800 dark:focus:ring-blue-100 bg-background dark:bg-zinc-900 border
-             border-gray-300 dark:border-gray-700 text-secondary-800 dark:text-blue-100"
-          />
-          <span className="absolute right-4 top-4 text-gray-500">km</span>
-        </div>
-        {errors.mileage && (
-          <p className="text-red-500 dark:text-red-400 text-sm">
-            Mileage is required
-          </p>
-        )}
-      </div>
+      <FormInput
+        value={mileage}
+        onChange={setMileage}
+        label="What's the approximate mileage on your car?"
+        placeholder="120,000"
+        isFormatNumber={true}
+        error={errors.mileage}
+        icon="km"
+      />
+
       <FormRadio
         options={[
           { label: "Automatic", value: "automatic" },
@@ -109,71 +94,30 @@ export default function FirstSellForm({
             transition={{ duration: 0.3 }}
             className="space-y-4"
           >
-            <div className="space-y-2">
-              <label className="block text-secondary-800 dark:text-blue-100 font-medium">
-                Loan company
-              </label>
-              <div>
-                <input
-                  type="text"
-                  value={loanCompany}
-                  onChange={(e) => setLoanCompany(e.target.value)}
-                  className="p-4 rounded-md w-full border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900 text-secondary-800 dark:text-blue-100
-                focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
-                />
-              </div>
-              {errors.loanCompany && (
-                <p className="text-red-500 dark:text-red-400 text-sm">
-                  Loan company is required
-                </p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <label className="block text-secondary-800 dark:text-blue-100 font-medium">
-                Loan balance
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  value={loanBalance}
-                  onChange={(e) => setLoanBalance(formatNumber(e.target.value))}
-                  className="p-4 rounded-md w-full border border-gray-300 dark:border-gray-700 bg-background dark:bg-zinc-900
-                   text-secondary-800 dark:text-blue-100
-                focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
-                />
-                <span className="absolute right-4 top-4 text-gray-500">$</span>
-              </div>
-              {errors.loanBalance && (
-                <p className="text-red-500 dark:text-red-400 text-sm">
-                  Loan balance is required
-                </p>
-              )}
-            </div>
+            <FormInput
+              value={loanCompany}
+              onChange={setLoanCompany}
+              label="What is the name of your loan company?"
+              error={errors.loanCompany}
+            />
+            <FormInput
+              value={loanBalance}
+              onChange={setLoanBalance}
+              label="What is your current loan balance?"
+              isFormatNumber={true}
+              error={errors.loanBalance}
+              icon="$"
+            />
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="space-y-2">
-        <label className="block text-secondary-800 dark:text-blue-100">
-          What colour is your vehicle?
-        </label>
-        <div>
-          <input
-            type="text"
-            value={colour}
-            name="Colour"
-            onChange={(e) => setColour(e.target.value)}
-            placeholder="e.g., Red, Blue, Black"
-            className="p-4 rounded-md  w-full   focus:outline-none focus:ring-2
-            focus:ring-secondary-800 dark:focus:ring-blue-100 bg-background dark:bg-zinc-900 border
-            border-gray-300 dark:border-gray-700 text-secondary-800 dark:text-blue-100"
-          />
-        </div>
-        {errors.colour && (
-          <p className="text-red-500 dark:text-red-400 text-sm">
-            Colour is required
-          </p>
-        )}
-      </div>
+      <FormInput
+        value={colour}
+        onChange={setColour}
+        label="What colour is your vehicle?"
+        placeholder="e.g. Red, Blue, Black"
+        error={errors.colour}
+      />
     </>
   );
 }
