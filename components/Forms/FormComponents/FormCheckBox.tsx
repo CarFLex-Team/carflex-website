@@ -5,18 +5,27 @@ export default function FormCheckBox({
   onChange,
   label,
   isFlex = false,
+  error,
 }: {
   options: string[];
   value: string[];
   onChange: React.Dispatch<React.SetStateAction<string[]>>;
   label: string;
   isFlex?: boolean;
+  error?: boolean;
 }) {
   return (
     <div className="space-y-2">
-      <label className="block text-secondary-800 dark:text-blue-100 font-medium">
-        {label}
-      </label>
+      <div>
+        <label className="block text-secondary-800 dark:text-blue-100 font-medium">
+          {label}
+        </label>
+        {error && (
+          <p className="text-red-500 dark:text-red-400 text-sm">
+            Please select at least one option.
+          </p>
+        )}
+      </div>
       <div className={`${isFlex ? "flex flex-wrap gap-2" : "space-y-2 "} `}>
         {options.map((option) => (
           <label

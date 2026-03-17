@@ -33,7 +33,9 @@ export default function CarInfoForm() {
   const [hasAccident, setHasAccident] = useState<string>("" as "yes" | "no");
   const [totalClaims, setTotalClaims] = useState("");
   const [condition, setCondition] = useState<string>("");
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const nextStep = () => {
+    if (!validateStep()) return; // blocks if invalid
     setStep((prev) => Math.min(prev + 1, 3));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
@@ -41,7 +43,46 @@ export default function CarInfoForm() {
     setStep((prev) => Math.max(prev - 1, 1));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
+  const validateStep = () => {
+    const newErrors: { [key: string]: boolean } = {};
 
+    if (step === 1) {
+      if (!mileage) newErrors.mileage = true;
+      if (!transmission) newErrors.transmission = true;
+      if (!soleOwner) newErrors.soleOwner = true;
+      if (!colour) newErrors.colour = true;
+      if (isLoan === "loan") {
+        if (!loanCompany) newErrors.loanCompany = true;
+        if (!loanBalance) newErrors.loanBalance = true;
+      }
+    }
+
+    if (step === 2) {
+      if (features.length === 0 && extraFeatures.trim() === "")
+        newErrors.features = true;
+    }
+
+    if (step === 3) {
+      if (!isDrivable) newErrors.isDrivable = true;
+      if (!hasAccident) newErrors.hasAccident = true;
+      if (!condition) newErrors.condition = true;
+      if (hasAccident === "yes" && totalClaims.trim() === "")
+        newErrors.totalClaims = true;
+      if (numberOfTires.trim() === "") newErrors.numberOfTires = true;
+      if (keys.trim() === "") newErrors.keys = true;
+      if (tiresReplaced.trim() === "") newErrors.tiresReplaced = true;
+      if (tiresKind.trim() === "") newErrors.tiresKind = true;
+      if (mechanicalIssuesFound === "") newErrors.mechanicalIssuesFound = true;
+      if (mechanicalIssuesFound === "yes" && mechanicalIssues.length === 0)
+        newErrors.mechanicalIssues = true;
+      if (exteriorDamage.length === 0) newErrors.exteriorDamage = true;
+      if (interiorDamage.length === 0) newErrors.interiorDamage = true;
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0; // true if no errors
+  };
   const handleSubmit = () => {
     const formData = {
       year,
@@ -103,6 +144,7 @@ export default function CarInfoForm() {
             setLoanCompany={setLoanCompany}
             loanBalance={loanBalance}
             setLoanBalance={setLoanBalance}
+            errors={errors}
           />
         )}
         {step === 2 && (

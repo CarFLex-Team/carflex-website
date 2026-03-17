@@ -18,6 +18,7 @@ export default function FirstSellForm({
   setLoanCompany,
   loanBalance,
   setLoanBalance,
+  errors,
 }: {
   mileage: string;
   setMileage: (value: string) => void;
@@ -33,6 +34,7 @@ export default function FirstSellForm({
   setLoanCompany: (value: string) => void;
   loanBalance: string;
   setLoanBalance: (value: string) => void;
+  errors: { [key: string]: boolean };
 }) {
   return (
     <>
@@ -47,7 +49,9 @@ export default function FirstSellForm({
           <input
             type="text"
             value={mileage}
-            onChange={(e) => setMileage(formatNumber(e.target.value))}
+            onChange={(e) => {
+              setMileage(formatNumber(e.target.value));
+            }}
             inputMode="numeric"
             pattern="\d*"
             placeholder="120,000"
@@ -57,6 +61,11 @@ export default function FirstSellForm({
           />
           <span className="absolute right-4 top-4 text-gray-500">km</span>
         </div>
+        {errors.mileage && (
+          <p className="text-red-500 dark:text-red-400 text-sm">
+            Mileage is required
+          </p>
+        )}
       </div>
       <FormRadio
         options={[
@@ -66,6 +75,7 @@ export default function FirstSellForm({
         value={transmission}
         onChange={setTransmission}
         label="Select your transmission type"
+        error={errors.transmission}
       />
       <FormRadio
         options={[
@@ -75,6 +85,7 @@ export default function FirstSellForm({
         value={soleOwner}
         onChange={(value) => setSoleOwner(value)}
         label="Are you the sole owner of this vehicle?"
+        error={errors.soleOwner}
       />
       <div className="space-y-2">
         <label className="block text-secondary-800 dark:text-blue-100">
@@ -111,6 +122,11 @@ export default function FirstSellForm({
                 focus:outline-none focus:ring-2 focus:ring-secondary-800 dark:focus:ring-blue-100"
                 />
               </div>
+              {errors.loanCompany && (
+                <p className="text-red-500 dark:text-red-400 text-sm">
+                  Loan company is required
+                </p>
+              )}
             </div>
             <div className="space-y-2">
               <label className="block text-secondary-800 dark:text-blue-100 font-medium">
@@ -127,6 +143,11 @@ export default function FirstSellForm({
                 />
                 <span className="absolute right-4 top-4 text-gray-500">$</span>
               </div>
+              {errors.loanBalance && (
+                <p className="text-red-500 dark:text-red-400 text-sm">
+                  Loan balance is required
+                </p>
+              )}
             </div>
           </motion.div>
         )}
@@ -147,6 +168,11 @@ export default function FirstSellForm({
             border-gray-300 dark:border-gray-700 text-secondary-800 dark:text-blue-100"
           />
         </div>
+        {errors.colour && (
+          <p className="text-red-500 dark:text-red-400 text-sm">
+            Colour is required
+          </p>
+        )}
       </div>
     </>
   );

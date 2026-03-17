@@ -3,17 +3,26 @@ export default function FormRadio({
   value,
   onChange,
   label,
+  error,
 }: {
   options: { label: string; value: string }[];
   value: string;
   onChange: (value: string) => void;
   label: string;
+  error?: boolean;
 }) {
   return (
     <div className="space-y-2">
-      <label className="block text-secondary-800 dark:text-blue-100 font-medium">
-        {label}
-      </label>
+      <div>
+        <label className="block text-secondary-800 dark:text-blue-100 font-medium">
+          {label}
+        </label>
+        {error && (
+          <p className="text-red-500 dark:text-red-400 text-sm">
+            Please select at least one option.
+          </p>
+        )}
+      </div>
       <div className="space-y-2">
         {options.map((option) => (
           <label
