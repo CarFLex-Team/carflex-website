@@ -35,7 +35,7 @@ export default function VinForm() {
         className="p-4 w-full rounded-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90 text-xl font-medium transition-colors duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 "
         disabled={disabled}
         onClick={() => {
-          router.push("/sell-car");
+          router.push("/sell-car?vin=" + vin + "&postalCode=" + postalCode);
         }}
       >
         Get Offer

@@ -53,7 +53,7 @@ export default function Main() {
         </div>
       </div>
 
-      <div className="relative sm:-mt-25 -mt-10 z-10 flex items-center justify-center px-3 sm:px-8 md:px-15 ">
+      <div className="relative sm:-mt-25 -mt-10 z-10 flex items-center justify-center px-3 sm:px-8 ">
         <SellCarContainer />
       </div>
     </>

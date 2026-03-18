@@ -4,12 +4,20 @@ import FirstSellForm from "./FirstSellForm";
 import SecondSellForm from "./SecondSellForm";
 import ThirdSellForm from "./ThirdSellForm";
 
-export default function CarInfoForm() {
+export default function CarInfoForm({
+  year,
+  make,
+  model,
+  postalCode,
+}: {
+  year: string;
+  make: string;
+  model: string;
+  postalCode: string;
+}) {
   const formRef = useRef<HTMLFormElement>(null);
   const [step, setStep] = useState(1);
-  const [year, setYear] = useState("");
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
+
   const [mileage, setMileage] = useState("");
   const [transmission, setTransmission] = useState("");
   const [soleOwner, setSoleOwner] = useState("");
@@ -77,7 +85,7 @@ export default function CarInfoForm() {
 
     setErrors(newErrors);
 
-    return Object.keys(newErrors).length === 0; // true if no errors
+    return Object.keys(newErrors).length === 0;
   };
   const handleSubmit = () => {
     if (!validateStep()) return;
