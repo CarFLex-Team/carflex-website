@@ -16,7 +16,9 @@ export default function SellCarContainer() {
         </ToggleButton>
         <ToggleButton
           selected={selectedTab === "vin"}
-          onClick={() => setSelectedTab("vin")}
+          // onClick={() => setSelectedTab("vin")}
+          onClick={() => {}}
+          disabled={true} //disable until vin form is ready
         >
           VIN
         </ToggleButton>
