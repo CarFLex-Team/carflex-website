@@ -5,14 +5,10 @@ import SecondSellForm from "./SecondSellForm";
 import ThirdSellForm from "./ThirdSellForm";
 
 export default function CarInfoForm({
-  year,
-  make,
-  model,
+  carId,
   postalCode,
 }: {
-  year: string;
-  make: string;
-  model: string;
+  carId: string;
   postalCode: string;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
@@ -90,9 +86,7 @@ export default function CarInfoForm({
   const handleSubmit = () => {
     if (!validateStep()) return;
     const formData = {
-      year,
-      make,
-      model,
+      carId,
       mileage,
       transmission,
       soleOwner,

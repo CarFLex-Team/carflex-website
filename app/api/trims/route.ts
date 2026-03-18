@@ -16,9 +16,9 @@ export async function GET(req: Request) {
 
     const { rows } = await db.query(
       `
-       SELECT DISTINCT trim_id, t.name
-        FROM vehicle_years
-        JOIN trims t ON vehicle_years.trim_id = t.id
+       SELECT  v.id,v.trim_id, t.name
+        FROM vehicle_years v
+        JOIN trims t ON v.trim_id = t.id
         WHERE year = $1 AND make_id = $2 AND model_id=$3
         ORDER BY t.name
      `,

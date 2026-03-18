@@ -6,7 +6,10 @@ export default function VehicleDetailsForm() {
     [],
   );
   const [makes, setMakes] = useState<{ make_id: string; name: string }[]>([]);
-  const [trims, setTrims] = useState<{ trim_id: string; name: string }[]>([]);
+  const [trims, setTrims] = useState<
+    { id: string; trim_id: string; name: string }[]
+  >([]);
+  const [carId, setCarId] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [year, setYear] = useState("");
   const [make, setMake] = useState("");
@@ -44,7 +47,10 @@ export default function VehicleDetailsForm() {
 
     fetch(`/api/trims?year=${year}&make=${make}&model=${model}`)
       .then((res) => res.json())
-      .then((data: { trim_id: string; name: string }[]) => setTrims(data))
+      .then((data: { id: string; trim_id: string; name: string }[]) => {
+        console.log("Received trims data:", data);
+        setTrims(data);
+      })
       .catch((err) => console.error(err));
   }, [year, make, model]);
   return (
@@ -112,7 +118,10 @@ export default function VehicleDetailsForm() {
       <select
         className="p-4 rounded-full  w-full  text-background border border-gray-300 focus:outline-none focus:ring-2 focus:ring-secondary-400 bg-secondary-800/40 disabled:cursor-not-allowed disabled:opacity-50"
         value={trim}
-        onChange={(e) => setTrim(e.target.value)}
+        onChange={(e) => {
+          setTrim(e.target.value);
+          setCarId(trims.find((t) => t.trim_id === e.target.value)?.id || "");
+        }}
         disabled={!year || !make || !model || trims.length === 0}
       >
         <option value="" disabled>
@@ -140,16 +149,7 @@ export default function VehicleDetailsForm() {
         className="p-4 w-full rounded-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90 text-xl font-medium transition-colors duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 "
         disabled={disabled}
         onClick={() => {
-          router.push(
-            "/sell-car?year=" +
-              year +
-              "&make=" +
-              make +
-              "&model=" +
-              model +
-              "&postalCode=" +
-              postalCode,
-          );
+          router.push("/sell-car?carId=" + carId + "&postalCode=" + postalCode);
         }}
       >
         Get Offer
