@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import SellForm from "@/components/Forms/SellForm";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -23,8 +23,15 @@ export default function SellCar() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
-      <SellForm year={year} make={make} model={model} postalCode={postalCode} />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
+        <SellForm
+          year={year}
+          make={make}
+          model={model}
+          postalCode={postalCode}
+        />
+      </div>
+    </Suspense>
   );
 }
