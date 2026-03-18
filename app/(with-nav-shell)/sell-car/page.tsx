@@ -23,15 +23,8 @@ export default function SellCar() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
-        <SellForm
-          year={year}
-          make={make}
-          model={model}
-          postalCode={postalCode}
-        />
-      </div>
-    </Suspense>
+    <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
+      <SellForm year={year} make={make} model={model} postalCode={postalCode} />
+    </div>
   );
 }
