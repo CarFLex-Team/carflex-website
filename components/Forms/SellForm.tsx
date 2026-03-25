@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import FirstSellForm from "./FirstSellForm";
 import SecondSellForm from "./SecondSellForm";
 import ThirdSellForm from "./ThirdSellForm";
+import CarDetails from "@/lib/types/carDetails";
 
 export default function CarInfoForm({
   carId,
@@ -16,7 +17,7 @@ export default function CarInfoForm({
 
   const [mileage, setMileage] = useState("");
   const [transmission, setTransmission] = useState("");
-  const [soleOwner, setSoleOwner] = useState("");
+  const [soleOwner, setSoleOwner] = useState<string>("" as "yes" | "no");
   const [colour, setColour] = useState("");
   const [exteriorDamage, setExteriorDamage] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
@@ -27,11 +28,12 @@ export default function CarInfoForm({
   const [keys, setKeys] = useState("");
   const [tiresReplaced, setTiresReplaced] = useState("");
   const [tiresKind, setTiresKind] = useState("");
-  const [isLoan, setIsLoan] = useState("no");
+  const [isLoan, setIsLoan] = useState<string>("no" as "yes" | "no");
   const [loanCompany, setLoanCompany] = useState("");
   const [loanBalance, setLoanBalance] = useState("");
-  const [mechanicalIssuesFound, setMechanicalIssuesFound] =
-    useState<string>("");
+  const [mechanicalIssuesFound, setMechanicalIssuesFound] = useState<string>(
+    "" as "yes" | "no",
+  );
   const [mechanicalIssues, setMechanicalIssues] = useState<string[]>([]);
   const [isDrivable, setIsDrivable] = useState<string>("" as "yes" | "no");
   const [hasAccident, setHasAccident] = useState<string>("" as "yes" | "no");
@@ -83,18 +85,18 @@ export default function CarInfoForm({
 
     return Object.keys(newErrors).length === 0;
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateStep()) return;
-    const formData = {
+    const formData: CarDetails = {
       carId,
       mileage,
       transmission,
-      soleOwner,
+      soleOwner: soleOwner === "yes",
       colour,
       exteriorDamage,
       features,
       extraFeatures,
-      isLoan,
+      isLoan: isLoan === "yes",
       loanCompany,
       loanBalance,
       interiorDamage,
@@ -103,14 +105,33 @@ export default function CarInfoForm({
       keys,
       tiresReplaced,
       tiresKind,
-      mechanicalIssuesFound,
+      mechanicalIssuesFound: mechanicalIssuesFound === "yes",
       mechanicalIssues,
-      isDrivable,
-      hasAccident,
+      isDrivable: isDrivable === "yes",
+      hasAccident: hasAccident === "yes",
       totalClaims,
       condition,
+      postalCode,
     };
-    console.log("Form Submitted:", formData);
+    try {
+      const res = await fetch("/api/add-car", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log("Success:", data);
+      return data;
+    } catch (err) {
+      console.error("Error submitting form:", err);
+    }
   };
 
   return (
