@@ -7,7 +7,15 @@ export default function SellCarContainer() {
   const [selectedTab, setSelectedTab] = useState("vehicle-details");
   return (
     <div className="bg-secondary-800/90  w-full flex flex-col items-center justify-center rounded-lg px-2 py-9 text-center">
-      <div className="relative flex items-center justify-between w-full sm:w-1/2 md:w-2/3 lg:w-1/3 bg-gray-100/90 dark:bg-zinc-700 rounded-full p-2 ">
+      <div className="w-full flex flex-col items-center justify-center mb-3">
+        <h2 className="text-3xl font-bold text-background dark:text-blue-100 ">
+          Get an Instant Offer for Your Car
+        </h2>
+        <p className="text-base text-gray-300 dark:text-gray-400">
+          Fill in the details and receive a fair offer for your vehicle
+        </p>
+      </div>
+      {/* <div className="relative flex items-center justify-between w-full sm:w-1/2 md:w-2/3 lg:w-1/3 bg-gray-100/90 dark:bg-zinc-700 rounded-full p-2 ">
         <ToggleButton
           selected={selectedTab === "vehicle-details"}
           onClick={() => setSelectedTab("vehicle-details")}
@@ -32,7 +40,7 @@ export default function SellCarContainer() {
                 : "translateX(100%)",
           }}
         />
-      </div>
+      </div> */}
       <div className="w-full  mt-6">
         {selectedTab === "vehicle-details" ? (
           <VehicleDetailsForm />
