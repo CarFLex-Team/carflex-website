@@ -1,6 +1,11 @@
-import Link from "next/link";
+import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+const fetcher = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .catch((err) => console.error(err));
+
 export default function VehicleDetailsForm() {
   const [models, setModels] = useState<{ model_id: string; name: string }[]>(
     [],
@@ -25,34 +30,31 @@ export default function VehicleDetailsForm() {
       setDisabled(true);
     }
   }, [year, make, model, postalCode]);
+  const { data: makesData } = useSWR(
+    year ? `/api/makes?year=${year}` : null,
+    fetcher,
+  );
   useEffect(() => {
-    if (!year) return;
+    if (makesData) setMakes(makesData);
+  }, [makesData]);
 
-    fetch(`/api/makes?year=${year}`)
-      .then((res) => res.json())
-      .then((data: { make_id: string; name: string }[]) => setMakes(data))
-      .catch((err) => console.error(err));
-  }, [year]);
+  const { data: modelsData } = useSWR(
+    year && make ? `/api/models?year=${year}&make=${make}` : null,
+    fetcher,
+  );
   useEffect(() => {
-    if (!year || !make) return;
+    if (modelsData) setModels(modelsData);
+  }, [modelsData]);
 
-    fetch(`/api/models?year=${year}&make=${make}`)
-      .then((res) => res.json())
-      .then((data: { model_id: string; name: string }[]) => setModels(data))
-      .catch((err) => console.error(err));
-  }, [year, make]);
+  const { data: trimsData } = useSWR(
+    year && make && model ? `/api/trims?year=${year}&make=${make}&model=${model}` : null,
+    fetcher,
+  );
   useEffect(() => {
-    console.log("Fetching trims for year:", models);
-    if (!year || !make || !model) return;
+    if (trimsData) setTrims(trimsData);
+  }, [trimsData]);
 
-    fetch(`/api/trims?year=${year}&make=${make}&model=${model}`)
-      .then((res) => res.json())
-      .then((data: { id: string; trim_id: string; name: string }[]) => {
-        console.log("Received trims data:", data);
-        setTrims(data);
-      })
-      .catch((err) => console.error(err));
-  }, [year, make, model]);
+
   return (
     <form className="flex flex-col md:flex-row items-center gap-4">
       <select
