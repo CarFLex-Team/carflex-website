@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import FirstSellForm from "./FirstSellForm";
 import SecondSellForm from "./SecondSellForm";
 import ThirdSellForm from "./ThirdSellForm";
+import Modal from "../ClientRender/Modal";
+import CustomerDetailsForm from "./CustomerDetailsForm";
 
 export default function CarInfoForm({
   carId,
@@ -13,7 +15,7 @@ export default function CarInfoForm({
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [step, setStep] = useState(1);
-
+  const [open, setOpen] = useState(false);
   const [mileage, setMileage] = useState("");
   const [transmission, setTransmission] = useState("");
   const [soleOwner, setSoleOwner] = useState("");
@@ -115,6 +117,21 @@ export default function CarInfoForm({
 
   return (
     <>
+      {open && (
+        <Modal
+          isOpen={open}
+          title="Almost there! Just need a few details to get you an offer."
+        >
+          <CustomerDetailsForm
+            postalCode={postalCode}
+            onClose={() => setOpen(false)}
+            onSuccess={() => {
+              setOpen(false);
+              alert("Customer added successfully!");
+            }}
+          />
+        </Modal>
+      )}
       <div className="flex justify-between w-full  fixed top-15 left-0 right-0 bg-background dark:bg-zinc-900 px-1  py-2 z-10">
         {[1, 2, 3, 4].map((s) => (
           <div
@@ -206,10 +223,10 @@ export default function CarInfoForm({
           ) : (
             <button
               type="button"
-              onClick={handleSubmit}
+              onClick={() => setOpen(true)}
               className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
             >
-              Get an Offer
+              Submit
             </button>
           )}
         </div>

@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function ToggleButton({ selected, children, onClick }: any) {
   return (
     <button
@@ -19,11 +17,11 @@ function ToggleButton({ selected, children, onClick }: any) {
 export default function ChoiceToggle({
   tabs,
   selectedTab,
-  setSelectedTab,
+  onChange,
 }: {
   tabs: { id: string; label: string }[];
   selectedTab: string;
-  setSelectedTab: (id: string) => void;
+  onChange: (id: string) => void;
 }) {
   const tabIndex = tabs.findIndex((tab) => tab.id === selectedTab);
   const transformPercent = (tabIndex / tabs.length) * 200;
@@ -34,7 +32,7 @@ export default function ChoiceToggle({
         <ToggleButton
           key={tab.id}
           selected={selectedTab === tab.id}
-          onClick={() => setSelectedTab(tab.id)}
+          onClick={() => onChange(tab.id)}
         >
           {tab.label}
         </ToggleButton>

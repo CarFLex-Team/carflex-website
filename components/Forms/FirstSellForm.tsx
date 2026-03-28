@@ -82,7 +82,11 @@ export default function FirstSellForm({
             { id: "loan", label: "Loan" },
           ]}
           selectedTab={isLoan}
-          setSelectedTab={setIsLoan}
+          onChange={(id) => {
+            setIsLoan(id);
+            setLoanCompany("");
+            setLoanBalance("");
+          }}
         />
       </div>
       <AnimatePresence>

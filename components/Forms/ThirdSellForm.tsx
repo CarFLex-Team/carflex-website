@@ -154,7 +154,11 @@ export default function ThirdSellForm({
           },
         ]}
         value={mechanicalIssuesFound}
-        onChange={setMechanicalIssuesFound}
+        onChange={(value) => {
+          setMechanicalIssuesFound(value);
+
+          setMechanicalIssues([]);
+        }}
         label="Do you have any mechanical issues with your vehicle?"
         error={errors.mechanicalIssuesFound}
       />
@@ -208,7 +212,10 @@ export default function ThirdSellForm({
           },
         ]}
         value={hasAccident}
-        onChange={setHasAccident}
+        onChange={(value) => {
+          setHasAccident(value);
+          setTotalClaims("");
+        }}
         label="Have you had any accidents or insurance claims?"
         error={errors.hasAccident}
       />
