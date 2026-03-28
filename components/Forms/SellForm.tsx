@@ -5,8 +5,9 @@ import SecondSellForm from "./SecondSellForm";
 import ThirdSellForm from "./ThirdSellForm";
 import Modal from "../ClientRender/Modal";
 import CustomerDetailsForm from "./CustomerDetailsForm";
-
 import CarDetails from "@/lib/types/carDetails";
+import { ChevronLeftIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CarInfoForm({
   carId,
@@ -15,9 +16,15 @@ export default function CarInfoForm({
   carId: string;
   postalCode: string;
 }) {
+  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [mileage, setMileage] = useState("");
   const [transmission, setTransmission] = useState("");
   const [soleOwner, setSoleOwner] = useState<string>("" as "yes" | "no");
@@ -45,7 +52,7 @@ export default function CarInfoForm({
   const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
   const nextStep = () => {
     if (!validateStep()) return; // blocks if invalid
-    setStep((prev) => Math.min(prev + 1, 3));
+    setStep((prev) => Math.min(prev + 1, 4));
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const prevStep = () => {
@@ -83,6 +90,11 @@ export default function CarInfoForm({
       if (hasAccident === "yes" && totalClaims.trim() === "")
         newErrors.totalClaims = true;
     }
+    if (step === 4) {
+      if (!name.trim()) newErrors.name = true;
+      if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) newErrors.email = true;
+      if (!phone.trim() || !/^\d{10}$/.test(phone)) newErrors.phone = true;
+    }
 
     setErrors(newErrors);
 
@@ -90,7 +102,11 @@ export default function CarInfoForm({
   };
   const handleSubmit = async () => {
     if (!validateStep()) return;
+    setLoading(true);
     const formData: CarDetails = {
+      name,
+      email,
+      phone,
       carId,
       mileage,
       transmission,
@@ -131,27 +147,61 @@ export default function CarInfoForm({
 
       const data = await res.json();
       console.log("Success:", data);
+      setSuccess(true);
       return data;
     } catch (err) {
       console.error("Error submitting form:", err);
+    } finally {
+      setLoading(false);
     }
   };
-
+  console.log(success);
   return (
     <>
       {open && (
         <Modal
           isOpen={open}
-          title="Almost there! Just need a few details to get you an offer."
+          title={success ? "" : "Almost there!"}
+          description={
+            success ? "" : "Just need a contact detail to finalize your offer"
+          }
         >
-          <CustomerDetailsForm
-            postalCode={postalCode}
-            onClose={() => setOpen(false)}
-            onSuccess={() => {
-              setOpen(false);
-              alert("Customer added successfully!");
-            }}
-          />
+          {success ? (
+            <>
+              <div className="flex flex-col items-center justify-center space-y-4 py-10">
+                <h2 className="text-lg md:text-2xl font-semibold text-gray-900 dark:text-blue-100 ">
+                  Thank you for submitting your car details!
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  We will review the information you provided and get back to
+                  you with an offer shortly.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => router.push("/")}
+                  className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
+                >
+                  Back to Home
+                </button>
+              </div>
+            </>
+          ) : (
+            <CustomerDetailsForm
+              onClose={() => {
+                setOpen(false);
+                prevStep();
+              }}
+              onSuccess={handleSubmit}
+              name={name}
+              email={email}
+              phone={phone}
+              setName={setName}
+              setEmail={setEmail}
+              setPhone={setPhone}
+              errors={errors}
+              loading={loading}
+            />
+          )}
         </Modal>
       )}
       <div className="flex justify-between w-full  fixed top-15 left-0 right-0 bg-background dark:bg-zinc-900 px-1  py-2 z-10">
@@ -193,7 +243,7 @@ export default function CarInfoForm({
             setExtraFeatures={setExtraFeatures}
           />
         )}
-        {step === 3 && (
+        {(step === 3 || step === 4) && (
           <ThirdSellForm
             exteriorDamage={exteriorDamage}
             setExteriorDamage={setExteriorDamage}
@@ -229,9 +279,9 @@ export default function CarInfoForm({
             <button
               type="button"
               onClick={prevStep}
-              className="px-6 py-3 rounded-md bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors cursor-pointer"
+              className=" p-3 rounded-md bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors cursor-pointer"
             >
-              Back
+              <ChevronLeftIcon size={20} />
             </button>
           )}
           {step < 3 ? (
@@ -245,7 +295,10 @@ export default function CarInfoForm({
           ) : (
             <button
               type="button"
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                nextStep();
+                setOpen(true);
+              }}
               className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
             >
               Submit

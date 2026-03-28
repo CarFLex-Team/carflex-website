@@ -1,43 +1,30 @@
-import { useState } from "react";
+import LoadingSpinner from "../LoadingSpinner";
 import FormInput from "./FormComponents/FormInput";
+import { ChevronLeftIcon } from "lucide-react";
 
 export default function CustomerDetailsForm({
-  postalCode,
   onSuccess,
   onClose,
+  name,
+  email,
+  phone,
+  setName,
+  setEmail,
+  setPhone,
+  errors,
+  loading,
 }: {
-  postalCode: string;
   onSuccess: () => void;
   onClose: () => void;
+  name: string;
+  email: string;
+  phone: string;
+  setName: (value: string) => void;
+  setEmail: (value: string) => void;
+  setPhone: (value: string) => void;
+  errors: { [key: string]: boolean };
+  loading: boolean;
 }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const newErrors: { [key: string]: boolean } = {};
-    if (!name.trim()) newErrors.name = true;
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) newErrors.email = true;
-    if (!phone.trim() || !/^\d{10}$/.test(phone)) newErrors.phone = true;
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length > 0) return;
-    try {
-      const response = await fetch("/api/customers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone, postalCode }),
-      });
-      if (response.ok) {
-        onSuccess();
-      } else {
-        alert("Failed to add customer. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error adding customer:", error);
-      alert("An error occurred. Please try again.");
-    }
-  };
   return (
     <form className="space-y-4">
       <FormInput
@@ -66,16 +53,16 @@ export default function CustomerDetailsForm({
         <button
           type="button"
           onClick={onClose}
-          className="px-6 py-3 rounded-md bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors cursor-pointer"
+          className="p-3 rounded-md bg-gray-300 text-gray-700 hover:bg-gray-400 transition-colors cursor-pointer"
         >
-          Back
+          <ChevronLeftIcon size={20} />
         </button>
         <button
           type="button"
-          onClick={handleSubmit}
+          onClick={onSuccess}
           className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
         >
-          Get an Offer
+          {loading ? <LoadingSpinner /> : "Get an Offer"}
         </button>
       </div>
     </form>

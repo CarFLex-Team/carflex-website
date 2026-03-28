@@ -19,7 +19,7 @@ export default function FormInput({
 }) {
   return (
     <div className="space-y-2">
-      <div>
+      <div className="flex items-center justify-between">
         <label className="block text-secondary-800 dark:text-blue-100 font-medium">
           {label}
         </label>

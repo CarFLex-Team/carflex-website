@@ -1,4 +1,7 @@
 export default interface CarDetails {
+  name: string;
+  email: string;
+  phone: string;
   carId: string;
   postalCode: string;
   mileage: string;
