@@ -65,6 +65,9 @@ export default function CustomerDetailsForm({
           {loading ? <LoadingSpinner /> : "Get an Offer"}
         </button>
       </div>
+      <p className="text-sm text-red-500">
+        {errors.submit && "Could not submit data. Please try again."}
+      </p>
     </form>
   );
 }

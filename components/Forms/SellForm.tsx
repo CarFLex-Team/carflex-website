@@ -142,6 +142,8 @@ export default function CarInfoForm({
       });
 
       if (!res.ok) {
+        setErrors({ submit: true });
+        setSuccess(false);
         throw new Error(`HTTP error! status: ${res.status}`);
       }
 
@@ -296,8 +298,10 @@ export default function CarInfoForm({
             <button
               type="button"
               onClick={() => {
-                nextStep();
-                setOpen(true);
+                if (validateStep()) {
+                  nextStep();
+                  setOpen(true);
+                }
               }}
               className="px-6 py-3 rounded-md bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-500/90 dark:hover:bg-primary-600/90  font-medium transition-colors duration-300 cursor-pointer"
             >

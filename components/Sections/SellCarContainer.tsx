@@ -2,7 +2,6 @@
 import { useState } from "react";
 import ToggleButton from "../Buttons/ToggleButton";
 import VehicleDetailsForm from "../Forms/VehicleDetailsForm";
-import VinForm from "../Forms/VinForm";
 export default function SellCarContainer() {
   const [selectedTab, setSelectedTab] = useState("vehicle-details");
   return (

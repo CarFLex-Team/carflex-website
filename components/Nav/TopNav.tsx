@@ -61,7 +61,9 @@ export default function TopNav({
   };
   return (
     <nav className="flex justify-between items-center min-h-17 px-6 sm:px-9 bg-gray-100 dark:bg-zinc-800 fixed w-full top-0 z-40 border-b-2 border-gray-200 dark:border-zinc-700">
-      <Logo />
+      <a href="/">
+        <Logo />
+      </a>
 
       <div className="hidden md:flex items-center gap-4">
         {navItems.map((item) => {
