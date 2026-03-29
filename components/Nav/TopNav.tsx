@@ -23,7 +23,7 @@ export default function TopNav({
 
   useEffect(() => {
     const handleScroll = () => {
-      let current = navItems[0].href;
+      let current = "";
 
       navItems.forEach((item) => {
         const section = document.getElementById(item.href);

@@ -84,12 +84,12 @@ export default function ThirdSellForm({
     "No, none of the above",
   ];
   const tiresReplacedOptions = [
-    { label: "Within the last year", value: "within_year" },
-    { label: "Over a year ago", value: "over_year" },
+    { label: "Within the last year", value: "Within last year" },
+    { label: "Over a year ago", value: "Over a year ago" },
   ];
   const tiresKindOptions = [
-    { label: "All Season", value: "all_season" },
-    { label: "Winter Tires", value: "winter" },
+    { label: "All Season", value: "All Season" },
+    { label: "Winter Tires", value: "Winter Tires" },
   ];
   return (
     <>

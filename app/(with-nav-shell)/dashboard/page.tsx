@@ -1,11 +1,30 @@
+"use client";
+import CarList from "@/components/Cards/CarList";
+import useSWR from "swr";
 export default function Dashboard() {
+  const { data } = useSWR("/api/offers", (url) =>
+    fetch(url).then((res) => res.json()),
+  );
+
+  if (!data)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-gray-300 border-t-primary-500 dark:border-t-primary-600 rounded-full animate-spin"></div>
+      </div>
+    );
+  if (data.length === 0)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-500 dark:text-gray-400">No vehicles found.</p>
+      </div>
+    );
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      <p>
-        Welcome to your dashboard! Here you can manage your account and view
-        your activity.
-      </p>
+    <div className="min-h-screen  pt-20 pb-7 px-4">
+      <div className="flex flex-col gap-4">
+        {data?.map((vehicle: any) => (
+          <CarList key={vehicle.id} carDetails={vehicle} />
+        ))}
+      </div>
     </div>
   );
 }
