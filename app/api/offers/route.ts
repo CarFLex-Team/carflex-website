@@ -1,6 +1,20 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db";
-import CarDetails from "@/lib/types/carDetails";
+export async function GET(req: Request) {
+  try {
+    const { rows } = await db.query(
+      `SELECT * FROM cars_sent ORDER BY created_at DESC`,
+    );
+
+    return NextResponse.json(rows);
+  } catch (err) {
+    console.error("GET /api/offers error", err);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+}
 
 export async function POST(req: Request) {
   const client = await db.connect();

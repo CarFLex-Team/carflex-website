@@ -27,7 +27,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(rows);
   } catch (err) {
-    console.error("GET /api/trims error", err);
+    console.error("GET /api/vehicles/trims error", err);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 },

@@ -31,7 +31,7 @@ export default function VehicleDetailsForm() {
     }
   }, [year, make, model, postalCode]);
   const { data: makesData } = useSWR(
-    year ? `/api/makes?year=${year}` : null,
+    year ? `/api/vehicles/makes?year=${year}` : null,
     fetcher,
   );
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function VehicleDetailsForm() {
   }, [makesData]);
 
   const { data: modelsData } = useSWR(
-    year && make ? `/api/models?year=${year}&make=${make}` : null,
+    year && make ? `/api/vehicles/models?year=${year}&make=${make}` : null,
     fetcher,
   );
   useEffect(() => {
@@ -47,13 +47,14 @@ export default function VehicleDetailsForm() {
   }, [modelsData]);
 
   const { data: trimsData } = useSWR(
-    year && make && model ? `/api/trims?year=${year}&make=${make}&model=${model}` : null,
+    year && make && model
+      ? `/api/vehicles/trims?year=${year}&make=${make}&model=${model}`
+      : null,
     fetcher,
   );
   useEffect(() => {
     if (trimsData) setTrims(trimsData);
   }, [trimsData]);
-
 
   return (
     <form className="flex flex-col md:flex-row items-center gap-4">

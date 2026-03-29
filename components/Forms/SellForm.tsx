@@ -133,7 +133,7 @@ export default function CarInfoForm({
       postalCode,
     };
     try {
-      const res = await fetch("/api/add-car", {
+      const res = await fetch("/api/offers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
